@@ -16,8 +16,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.support.v4.view.MenuItemCompat;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    static Button notifCount;
+    static int mNotifCount = 0;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -42,11 +47,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
 
         // Set up the action bar to show a dropdown list.
         ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//        actionBar.setTitle(mTitle);
-
-        // Set up the dropdown list navigation in the action bar.
         actionBar.setListNavigationCallbacks(
                 // Specify a SpinnerAdapter to populate the dropdown list.
                 new ArrayAdapter<String>(
@@ -104,8 +104,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Restore the previously serialized current dropdown position.
         if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
-            getSupportActionBar().setSelectedNavigationItem(0);
-//            getSupportActionBar().setSelectedNavigationItem(savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
+            getSupportActionBar().setSelectedNavigationItem(savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
         }
     }
 
@@ -121,6 +120,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+//        MenuItem item = menu.findItem(R.id.action_show_group);
+//        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
+//        notifCount = (Button) MenuItemCompat.getActionView(item);
+//        notifCount.setText("2");
         showActionBar();
         return true;
     }
@@ -132,9 +135,15 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_add_group) {
-            Toast.makeText(HomeActivity.this, "Example action.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this, "Create group", Toast.LENGTH_SHORT).show();
             return true;
         }
+//
+//        if (id == R.id.action_show_group) {
+//            Toast.makeText(HomeActivity.this, "Show group", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+
 
 
         return super.onOptionsItemSelected(item);
