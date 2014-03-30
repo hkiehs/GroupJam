@@ -6,6 +6,7 @@
     <item android:id="@+id/action_add_group"
         android:title="@string/action_example"
         android:icon="@drawable/ic_action_group"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom" />
 
     <!--<item android:id="@+id/action_show_group"-->

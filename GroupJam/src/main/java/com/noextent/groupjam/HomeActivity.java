@@ -2,6 +2,7 @@ package com.noextent.groupjam;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Build;
@@ -115,11 +116,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
                 getSupportActionBar().getSelectedNavigationIndex());
     }
 
-
+    private SearchView mSearchView;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_add_group);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 //        MenuItem item = menu.findItem(R.id.action_show_group);
 //        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
 //        notifCount = (Button) MenuItemCompat.getActionView(item);
@@ -136,8 +139,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
         int id = item.getItemId();
         if (id == R.id.action_add_group) {
             Toast.makeText(HomeActivity.this, "Create group", Toast.LENGTH_SHORT).show();
+            mSearchView.setIconified(false);
             return true;
         }
+
+
 //
 //        if (id == R.id.action_show_group) {
 //            Toast.makeText(HomeActivity.this, "Show group", Toast.LENGTH_SHORT).show();
