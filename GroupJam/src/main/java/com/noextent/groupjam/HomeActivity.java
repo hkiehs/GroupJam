@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -41,10 +42,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
 
         // Set up the action bar to show a dropdown list.
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setTitle(mTitle);
-
+//        actionBar.setDisplayShowTitleEnabled(true);
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        actionBar.setTitle(mTitle);
 
         // Set up the dropdown list navigation in the action bar.
         actionBar.setListNavigationCallbacks(
@@ -68,6 +68,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    private void showActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setTitle(R.string.app_name);
     }
 
     @Override
@@ -114,6 +121,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        showActionBar();
         return true;
     }
 
@@ -123,9 +131,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_group) {
+            Toast.makeText(HomeActivity.this, "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
