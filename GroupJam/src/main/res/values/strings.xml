@@ -10,4 +10,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Create</string>
 
+    <string name="title_media_player">Media Player</string>
+    <string name="title_playlist">Playlist</string>
+
 </resources>

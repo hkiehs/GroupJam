@@ -34,6 +34,8 @@ import android.widget.TextView;
 
 public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    private MusicPlayerApplication mChatApplication = null;
+
     /**
      * The serialization (saved instance state) Bundle key representing the
      * current dropdown position.
@@ -69,6 +71,9 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mChatApplication = (MusicPlayerApplication) getApplication();
+        mChatApplication.checkin();
 
         // Set up the action bar to show a dropdown list.
         ActionBar actionBar = getSupportActionBar();
@@ -277,7 +282,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -285,11 +290,9 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    return getString(R.string.title_media_player);
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
+                    return getString(R.string.title_playlist);
             }
             return null;
         }
