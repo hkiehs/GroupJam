@@ -123,6 +123,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         getMenuInflater().inflate(R.menu.home, menu);
         MenuItem searchItem = menu.findItem(R.id.action_add_group);
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setImeOptions(EditorInfo.IME_ACTION_GO);
         mSearchView.setOnQueryTextListener(this);
 //        MenuItem item = menu.findItem(R.id.action_show_group);
 //        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
