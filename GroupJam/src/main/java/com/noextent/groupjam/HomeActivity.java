@@ -23,8 +23,8 @@ import android.view.inputmethod.EditorInfo;
 
 public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    static Button notifCount;
-    static int mNotifCount = 0;
+//    static Button notifCount;
+//    static int mNotifCount = 0;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
