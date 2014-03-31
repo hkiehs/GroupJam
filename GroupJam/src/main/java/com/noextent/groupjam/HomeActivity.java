@@ -20,7 +20,7 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.support.v4.view.MenuItemCompat;
 
-public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     static Button notifCount;
     static int mNotifCount = 0;
@@ -123,6 +123,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
         getMenuInflater().inflate(R.menu.home, menu);
         MenuItem searchItem = menu.findItem(R.id.action_add_group);
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setOnQueryTextListener(this);
 //        MenuItem item = menu.findItem(R.id.action_show_group);
 //        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
 //        notifCount = (Button) MenuItemCompat.getActionView(item);
@@ -205,6 +206,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.OnNavig
             ((HomeActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 
 }
