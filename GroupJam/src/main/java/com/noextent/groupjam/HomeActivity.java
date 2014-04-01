@@ -34,8 +34,6 @@ import android.widget.TextView;
 
 public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private MusicPlayerApplication mChatApplication = null;
-
     /**
      * The serialization (saved instance state) Bundle key representing the
      * current dropdown position.
@@ -71,9 +69,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        mChatApplication = (MusicPlayerApplication) getApplication();
-        mChatApplication.checkin();
 
         // Set up the action bar to show a dropdown list.
         ActionBar actionBar = getSupportActionBar();

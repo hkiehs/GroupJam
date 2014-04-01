@@ -25,8 +25,9 @@ import com.noextent.groupjam.Observable;
 import com.noextent.groupjam.Observer;
 import com.noextent.groupjam.RegisterInterface;
 import com.noextent.groupjam.Utility;
+import com.noextent.groupjam.HomeActivity;
 
-public class PlayerActivity extends Activity implements Observer, RegisterInterface, DownloadInterface {
+public class PlayerActivity extends HomeActivity implements Observer, RegisterInterface, DownloadInterface {
 	private static final String LOG_TAG = "PlayerActivity";
 
 	public void onCreate(Bundle savedInstanceState) {
