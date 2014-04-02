@@ -100,8 +100,8 @@ public class HostActivity extends Activity implements Observer {
 //        switch(id) {
 //        case DIALOG_SET_NAME_ID:
 //	        {
-//	        	DialogBuilder builder = new DialogBuilder();
-//	        	result = builder.createHostNameDialog(this, mChatApplication);
+	        	DialogBuilder builder = new DialogBuilder();
+	        	result = builder.createHostNameDialog(this, mChatApplication);
 //	        }
 //        	break;
 //        case DIALOG_START_ID:

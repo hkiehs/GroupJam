@@ -1,7 +1,9 @@
 package com.noextent.groupjam;
 
 import java.util.Locale;
+import android.util.Log;
 import android.app.Activity;
+import java.util.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
@@ -31,9 +33,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer {
 
+    private static final String TAG = "HomeActivity";
     /**
      * The serialization (saved instance state) Bundle key representing the
      * current dropdown position.
@@ -65,24 +77,33 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
      */
     ViewPager mViewPager;
 
+    private ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreateHostActivity();
+
         setContentView(R.layout.activity_home);
+
+        MusicPlayerApplication.mContext = this;
 
         // Set up the action bar to show a dropdown list.
         ActionBar actionBar = getSupportActionBar();
+
+        adapter = new ArrayAdapter<String>(
+                actionBar.getThemedContext(),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                new String[] {
+                        getString(R.string.title_section1),
+                        getString(R.string.title_section2),
+                        getString(R.string.title_section3),
+                });
+
         actionBar.setListNavigationCallbacks(
                 // Specify a SpinnerAdapter to populate the dropdown list.
-                new ArrayAdapter<String>(
-                        actionBar.getThemedContext(),
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1,
-                        new String[] {
-                                getString(R.string.title_section1),
-                                getString(R.string.title_section2),
-                                getString(R.string.title_section3),
-                        }),
+                adapter,
                 this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -101,6 +122,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
     }
 
     private void showActionBar() {
@@ -177,14 +199,10 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             return true;
         }
 
-
-//
 //        if (id == R.id.action_show_group) {
 //            Toast.makeText(HomeActivity.this, "Show group", Toast.LENGTH_SHORT).show();
 //            return true;
 //        }
-
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -242,8 +260,23 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    public boolean onQueryTextSubmit(String text) {
+        if (text.length() > 0) {
+            Toast.makeText(this, "Channel created :: " + text, Toast.LENGTH_LONG).show();
+            mChatApplication.hostSetChannelName(text);
+            mChatApplication.hostInitChannel();
+            mChatApplication.hostStartChannel();
+
+            List<String> channels = mChatApplication.getFoundChannels();
+            for (String channel : channels) {
+                int lastDot = channel.lastIndexOf('.');
+                if (lastDot < 0) {
+                    continue;
+                }
+                adapter.add(channel.substring(lastDot + 1));
+            }
+            adapter.notifyDataSetChanged();
+        }
         return true;
     }
 
@@ -316,5 +349,150 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             return rootView;
         }
     }
+
+    /**
+     * Host Activity Integration
+     */
+
+    public static MusicPlayerApplication mChatApplication = null;
+
+    static final int DIALOG_SET_NAME_ID = 0;
+    static final int DIALOG_START_ID = 1;
+    static final int DIALOG_STOP_ID = 2;
+    public static final int DIALOG_ALLJOYN_ERROR_ID = 3;
+
+
+    private void onCreateHostActivity() {
+        /*
+         * Keep a pointer to the Android Appliation class around.  We use this
+         * as the Model for our MVC-based application.  Whenever we are started
+         * we need to "check in" with the application so it can ensure that our
+         * required services are running.
+         */
+        mChatApplication = (MusicPlayerApplication)getApplication();
+        mChatApplication.checkin();
+
+        /*
+         * Call down into the model to get its current state.  Since the model
+         * outlives its Activities, this may actually be a lot of state and not
+         * just empty.
+         */
+        updateChannelState();
+
+        /*
+         * Now that we're all ready to go, we are ready to accept notifications
+         * from other components.
+         */
+        mChatApplication.addObserver(this);
+    }
+
+    public void onDestroy() {
+        mChatApplication = (MusicPlayerApplication)getApplication();
+        mChatApplication.deleteObserver(this);
+        super.onDestroy();
+ 	}
+
+    public synchronized void update(Observable o, Object arg) {
+        Log.i(TAG, "update(" + arg + ")");
+        String qualifier = (String)arg;
+
+        if (qualifier.equals(MusicPlayerApplication.APPLICATION_QUIT_EVENT)) {
+            Message message = mHandler.obtainMessage(HANDLE_APPLICATION_QUIT_EVENT);
+            mHandler.sendMessage(message);
+        }
+
+        if (qualifier.equals(MusicPlayerApplication.HOST_CHANNEL_STATE_CHANGED_EVENT)) {
+            Message message = mHandler.obtainMessage(HANDLE_CHANNEL_STATE_CHANGED_EVENT);
+            mHandler.sendMessage(message);
+        }
+
+        if (qualifier.equals(MusicPlayerApplication.ALLJOYN_ERROR_EVENT)) {
+            Message message = mHandler.obtainMessage(HANDLE_ALLJOYN_ERROR_EVENT);
+            mHandler.sendMessage(message);
+        }
+    }
+
+    private void updateChannelState() {
+    	AllJoynService.HostChannelState channelState = mChatApplication.hostGetChannelState();
+    	String name = mChatApplication.hostGetChannelName();
+    	boolean haveName = true;
+    	if (name == null) {
+    		haveName = false;
+    		name = "Not set";
+    	}
+        //mChannelName.setText(name);
+        switch (channelState) {
+        case IDLE:
+//            mChannelStatus.setText("Idle");
+            break;
+        case NAMED:
+//            mChannelStatus.setText("Named");
+            break;
+        case BOUND:
+//            mChannelStatus.setText("Bound");
+            break;
+        case ADVERTISED:
+//            mChannelStatus.setText("Advertised");
+            break;
+        case CONNECTED:
+//            mChannelStatus.setText("Connected");
+            break;
+        default:
+//            mChannelStatus.setText("Unknown");
+            break;
+        }
+
+//        if (channelState == AllJoynService.HostChannelState.IDLE) {
+//            mSetNameButton.setEnabled(true);
+//            if (haveName) {
+//            	mStartButton.setEnabled(true);
+//            } else {
+//                mStartButton.setEnabled(false);
+//            }
+//            mStopButton.setEnabled(false);
+//        } else {
+//            mSetNameButton.setEnabled(false);
+//            mStartButton.setEnabled(false);
+//            mStopButton.setEnabled(true);
+//        }
+    }
+
+    private void alljoynError() {
+    	if (mChatApplication.getErrorModule() == MusicPlayerApplication.Module.GENERAL ||
+    		mChatApplication.getErrorModule() == MusicPlayerApplication.Module.USE) {
+    		showDialog(DIALOG_ALLJOYN_ERROR_ID);
+    	}
+    }
+
+    private static final int HANDLE_APPLICATION_QUIT_EVENT = 0;
+    private static final int HANDLE_CHANNEL_STATE_CHANGED_EVENT = 1;
+    private static final int HANDLE_ALLJOYN_ERROR_EVENT = 2;
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+	            case HANDLE_APPLICATION_QUIT_EVENT:
+	            {
+	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_APPLICATION_QUIT_EVENT");
+	                finish();
+	            }
+	            break;
+            case HANDLE_CHANNEL_STATE_CHANGED_EVENT:
+	            {
+	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_CHANNEL_STATE_CHANGED_EVENT");
+	                updateChannelState();
+	            }
+                break;
+            case HANDLE_ALLJOYN_ERROR_EVENT:
+            {
+                Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
+                alljoynError();
+            }
+            break;
+            default:
+                break;
+            }
+        }
+    };
 
 }

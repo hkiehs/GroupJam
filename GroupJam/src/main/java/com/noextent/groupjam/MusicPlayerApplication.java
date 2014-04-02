@@ -18,6 +18,7 @@ package com.noextent.groupjam;
 
 import android.app.Application;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -76,6 +77,9 @@ import java.util.List;
  */
 public class MusicPlayerApplication extends Application implements Observable {
 	private static final String TAG = "chat.ChatApplication";
+
+    public static Context mContext;
+
 	public static String PACKAGE_NAME;
 	/**
 	 * When created, the application fires an intent to create the AllJoyn
