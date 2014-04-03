@@ -12,5 +12,6 @@
 
     <string name="title_media_player">Media Player</string>
     <string name="title_playlist">Playlist</string>
+    <string name="select_group">Select a group</string>
 
 </resources>

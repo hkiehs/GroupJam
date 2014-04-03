@@ -1,7 +1,7 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 10
+    compileSdkVersion 18
     buildToolsVersion '19.0.3'
 
     defaultConfig {

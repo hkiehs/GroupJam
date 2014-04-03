@@ -45,13 +45,18 @@ public class MediaPlayerFragment extends Fragment {
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(LOG_TAG, "Join Button pressed");
+//
+//                List<String> channels = mChatApplication.getFoundChannels();
+//                for (String channel : channels) {
+//                    Log.i(LOG_TAG, "Channel [" + channel + "]");
+//                }
+//
+//                activity.showDialog(DIALOG_JOIN_ID);
 
-                List<String> channels = mChatApplication.getFoundChannels();
-                for (String channel : channels) {
-                    Log.i(LOG_TAG, "Channel [" + channel + "]");
-                }
+                ChannelDialogFragment channelDialogFragment = new ChannelDialogFragment(mChatApplication);
+                channelDialogFragment.show(getFragmentManager(), "dialog");
+//                channelDialogFragment.show
 
-                activity.showDialog(DIALOG_JOIN_ID);
             }
         });
 
