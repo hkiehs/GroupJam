@@ -1,47 +1,32 @@
 package com.noextent.groupjam;
 
-import java.util.Locale;
-import android.util.Log;
-import android.app.Activity;
-import java.util.*;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.SearchView;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.content.Context;
-import android.os.Build;
-import android.view.Gravity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import android.support.v4.view.MenuItemCompat;
-import android.view.inputmethod.EditorInfo;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.app.Activity;
-import android.app.Dialog;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
+import com.noextent.groupjam.fragments.MediaPlayerFragment;
+
+import java.util.List;
+import java.util.Locale;
 
 public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer {
 
@@ -217,48 +202,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }
-
     @Override
     public boolean onQueryTextSubmit(String text) {
         if (text.length() > 0) {
@@ -300,11 +243,12 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             // getItem is called to instantiate the fragment for the given page.
             // Return a DummySectionFragment (defined as a static inner class
             // below) with the page number as its lone argument.
-            Fragment fragment = new DummySectionFragment();
-            Bundle args = new Bundle();
-            args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-            fragment.setArguments(args);
-            return fragment;
+            MediaPlayerFragment mediaPlayerFragment = new MediaPlayerFragment(mChatApplication, HomeActivity.this);
+            //Fragment fragment = new DummySectionFragment();
+            //Bundle args = new Bundle();
+            //args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+            //fragment.setArguments(args);
+            return mediaPlayerFragment;
         }
 
         @Override
@@ -343,7 +287,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_dummy, container,  false);
+            View rootView = inflater.inflate(R.layout.fragment_media_player, container,  false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;

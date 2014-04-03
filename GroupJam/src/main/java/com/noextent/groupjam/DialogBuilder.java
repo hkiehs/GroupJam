@@ -16,8 +16,6 @@
 
 package com.noextent.groupjam;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.util.Log;
@@ -31,9 +29,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.R;
-import com.noextent.groupjam.PlayerActivity;
+import java.util.List;
 
 public class DialogBuilder {
     private static final String TAG = "chat.Dialogs";
@@ -50,6 +46,7 @@ public class DialogBuilder {
         
 	    List<String> channels = application.getFoundChannels();
         for (String channel : channels) {
+            Log.i(TAG, "Channel [" + channel + "]");
         	int lastDot = channel.lastIndexOf('.');
         	if (lastDot < 0) {
         		continue;
