@@ -23,12 +23,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.noextent.groupjam.callbacks.GroupInterface;
 import com.noextent.groupjam.fragments.MediaPlayerFragment;
 
 import java.util.List;
 import java.util.Locale;
 
-public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, ActionBar.OnNavigationListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer {
+public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer, GroupInterface {
 
     private static final String TAG = "HomeActivity";
     /**
@@ -62,8 +63,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
      */
     ViewPager mViewPager;
 
-    private ArrayAdapter<String> adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,23 +72,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
 
         MusicPlayerApplication.mContext = this;
 
-        // Set up the action bar to show a dropdown list.
-        ActionBar actionBar = getSupportActionBar();
-
-        adapter = new ArrayAdapter<String>(
-                actionBar.getThemedContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                new String[] {
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                });
-
-        actionBar.setListNavigationCallbacks(
-                // Specify a SpinnerAdapter to populate the dropdown list.
-                adapter,
-                this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -107,13 +89,11 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
 
     private void showActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setTitle(R.string.app_name);
     }
 
@@ -193,32 +173,12 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onNavigationItemSelected(int position, long id) {
-        // When the given dropdown item is selected, show its contents in the
-        // container view.
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-//                .commit();
-        return true;
-    }
-
-    @Override
     public boolean onQueryTextSubmit(String text) {
         if (text.length() > 0) {
             Toast.makeText(this, "Channel created :: " + text, Toast.LENGTH_LONG).show();
             mChatApplication.hostSetChannelName(text);
             mChatApplication.hostInitChannel();
             mChatApplication.hostStartChannel();
-
-            List<String> channels = mChatApplication.getFoundChannels();
-            for (String channel : channels) {
-                int lastDot = channel.lastIndexOf('.');
-                if (lastDot < 0) {
-                    continue;
-                }
-                adapter.add(channel.substring(lastDot + 1));
-            }
-            adapter.notifyDataSetChanged();
         }
         return true;
     }
@@ -226,6 +186,12 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String s) {
         return false;
+    }
+
+    @Override
+    public void onGroupSelected(String group) {
+        if (group!=null)
+           getSupportActionBar().setSubtitle(group);
     }
 
     /**

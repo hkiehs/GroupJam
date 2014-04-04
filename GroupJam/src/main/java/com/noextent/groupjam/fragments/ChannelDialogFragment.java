@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
+import com.noextent.groupjam.callbacks.GroupInterface;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ public class ChannelDialogFragment extends DialogFragment {
     private static final String LOG_TAG = "ChannelDialogFragment";
 
     private MusicPlayerApplication application;
+    private GroupInterface groupInterface;
 
-    public ChannelDialogFragment(MusicPlayerApplication musicPlayerApplication) {
+    public ChannelDialogFragment(MusicPlayerApplication musicPlayerApplication, GroupInterface groupInterface) {
         this.application = musicPlayerApplication;
+        this.groupInterface = groupInterface;
     }
 
     @Override
@@ -40,15 +43,22 @@ public class ChannelDialogFragment extends DialogFragment {
         builder.setTitle(R.string.select_group).setAdapter(channelListAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // TODO leave any already joined channel
+                application.useLeaveChannel();
+                application.useSetChannelName("Not set");
+
                 Log.i(LOG_TAG, "Selected group [" + channels.get(which) + "]");
+                String channelName = channels.get(which);
+                application.useSetChannelName(channelName);
+                application.useJoinChannel();
+
+                int lastDot = channelName.lastIndexOf('.');
+                groupInterface.onGroupSelected(channelName.substring(lastDot + 1));
+
+                Toast.makeText(getActivity(), channelName + " joined", Toast.LENGTH_SHORT).show();
+
             }
         });
-//                .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // The 'which' argument contains the index position
-//                        // of the selected item
-//                    }
-//                });
         return builder.create();
     }
 }

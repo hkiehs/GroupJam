@@ -1,6 +1,5 @@
 package com.noextent.groupjam.fragments;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,22 +15,21 @@ import com.noextent.groupjam.MediaModel;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.Utility;
-
-import java.util.List;
+import com.noextent.groupjam.callbacks.GroupInterface;
 
 public class MediaPlayerFragment extends Fragment {
     public static final String LOG_TAG = "MediaPlayerFragment";
 
     private MusicPlayerApplication mChatApplication;
-    private Activity activity;
+    private GroupInterface groupInterface;
 
     private Button mJoinButton;
     private Button mLeaveButton;
     private Button mActionButton;
 
-    public MediaPlayerFragment(MusicPlayerApplication mChatApplication, Activity activity) {
+    public MediaPlayerFragment(MusicPlayerApplication mChatApplication, GroupInterface groupInterface) {
         this.mChatApplication = mChatApplication;
-        this.activity = activity;
+        this.groupInterface = groupInterface;
     }
 
     @Override
@@ -45,17 +43,8 @@ public class MediaPlayerFragment extends Fragment {
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(LOG_TAG, "Join Button pressed");
-//
-//                List<String> channels = mChatApplication.getFoundChannels();
-//                for (String channel : channels) {
-//                    Log.i(LOG_TAG, "Channel [" + channel + "]");
-//                }
-//
-//                activity.showDialog(DIALOG_JOIN_ID);
-
-                ChannelDialogFragment channelDialogFragment = new ChannelDialogFragment(mChatApplication);
+                ChannelDialogFragment channelDialogFragment = new ChannelDialogFragment(mChatApplication, groupInterface);
                 channelDialogFragment.show(getFragmentManager(), "dialog");
-//                channelDialogFragment.show
 
             }
         });
@@ -63,7 +52,7 @@ public class MediaPlayerFragment extends Fragment {
         mLeaveButton = (Button) rootView.findViewById(R.id.useLeave);
         mLeaveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                activity.showDialog(DIALOG_LEAVE_ID);
+                getActivity().showDialog(DIALOG_LEAVE_ID);
             }
         });
 
@@ -118,17 +107,17 @@ public class MediaPlayerFragment extends Fragment {
         switch (id) {
             case DIALOG_JOIN_ID : {
                 DialogBuilder builder = new DialogBuilder();
-                result = builder.createUseJoinDialog(activity, mChatApplication);
+                result = builder.createUseJoinDialog(getActivity(), mChatApplication);
             }
             break;
             case DIALOG_LEAVE_ID : {
                 DialogBuilder builder = new DialogBuilder();
-                result = builder.createUseLeaveDialog(activity, mChatApplication);
+                result = builder.createUseLeaveDialog(getActivity(), mChatApplication);
             }
             break;
             case DIALOG_ALLJOYN_ERROR_ID : {
                 DialogBuilder builder = new DialogBuilder();
-                result = builder.createAllJoynErrorDialog(activity, mChatApplication);
+                result = builder.createAllJoynErrorDialog(getActivity(), mChatApplication);
             }
             break;
         }
