@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,14 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.noextent.groupjam.AllJoynService;
+import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.NavigationDrawerFragment;
+import com.noextent.groupjam.Observable;
+import com.noextent.groupjam.Observer;
+import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
 import com.noextent.groupjam.fragments.MediaPlayerFragment;
 
-import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer, GroupInterface {
@@ -93,6 +97,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
 
     private void showActionBar() {
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.drawable.ic_actionbar);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(R.string.app_name);
     }

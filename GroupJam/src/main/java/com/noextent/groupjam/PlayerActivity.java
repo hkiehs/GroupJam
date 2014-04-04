@@ -2,7 +2,6 @@ package com.noextent.groupjam;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.os.Handler;
@@ -14,18 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.R;
-import com.noextent.groupjam.AllJoynService;
-import com.noextent.groupjam.DialogBuilder;
-import com.noextent.groupjam.MediaModel;
-import com.noextent.groupjam.Device;
-import com.noextent.groupjam.DownloadInterface;
-import com.noextent.groupjam.Observable;
-import com.noextent.groupjam.Observer;
-import com.noextent.groupjam.RegisterInterface;
-import com.noextent.groupjam.Utility;
-import com.noextent.groupjam.HomeActivity;
+import com.noextent.groupjam.activity.HomeActivity;
 
 public class PlayerActivity extends HomeActivity implements Observer, RegisterInterface, DownloadInterface {
 	private static final String LOG_TAG = "PlayerActivity";
