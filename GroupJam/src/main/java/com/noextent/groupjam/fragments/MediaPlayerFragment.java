@@ -1,6 +1,5 @@
 package com.noextent.groupjam.fragments;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.noextent.groupjam.DialogBuilder;
 import com.noextent.groupjam.MediaModel;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
@@ -101,26 +99,26 @@ public class MediaPlayerFragment extends Fragment {
     public static final int DIALOG_LEAVE_ID = 1;
     public static final int DIALOG_ALLJOYN_ERROR_ID = 2;
 
-    protected Dialog onCreateDialog(int id) {
-        Log.i(LOG_TAG, "onCreateDialog()");
-        Dialog result = null;
-        switch (id) {
-            case DIALOG_JOIN_ID : {
-                DialogBuilder builder = new DialogBuilder();
-                result = builder.createUseJoinDialog(getActivity(), mChatApplication);
-            }
-            break;
-            case DIALOG_LEAVE_ID : {
-                DialogBuilder builder = new DialogBuilder();
-                result = builder.createUseLeaveDialog(getActivity(), mChatApplication);
-            }
-            break;
-            case DIALOG_ALLJOYN_ERROR_ID : {
-                DialogBuilder builder = new DialogBuilder();
-                result = builder.createAllJoynErrorDialog(getActivity(), mChatApplication);
-            }
-            break;
-        }
-        return result;
-    }
+//    protected Dialog onCreateDialog(int id) {
+//        Log.i(LOG_TAG, "onCreateDialog()");
+//        Dialog result = null;
+//        switch (id) {
+//            case DIALOG_JOIN_ID : {
+//                DialogBuilder builder = new DialogBuilder();
+//                result = builder.createUseJoinDialog(getActivity(), mChatApplication);
+//            }
+//            break;
+//            case DIALOG_LEAVE_ID : {
+//                DialogBuilder builder = new DialogBuilder();
+//                result = builder.createUseLeaveDialog(getActivity(), mChatApplication);
+//            }
+//            break;
+//            case DIALOG_ALLJOYN_ERROR_ID : {
+//                DialogBuilder builder = new DialogBuilder();
+//                result = builder.createAllJoynErrorDialog(getActivity(), mChatApplication);
+//            }
+//            break;
+//        }
+//        return result;
+//    }
 }

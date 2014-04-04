@@ -61,9 +61,6 @@ public class ChannelDialogFragment extends DialogFragment {
                     application.useLeaveChannel();
                     groupInterface.onGroupSelected("No group selected");
                 }
-
-
-
             }
         });
         return builder.create();

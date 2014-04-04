@@ -4,13 +4,13 @@
     tools:context="com.noextent.groupjam.activity.HomeActivity" >
 
     <item android:id="@+id/action_leave_group"
-        android:title="@string/action_settings"
-        android:icon="@android:drawable/ic_delete"
+        android:title="@string/action_leave_group"
+        android:icon="@drawable/ic_action_close_group"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_add_group"
-        android:title="@string/action_example"
-        android:icon="@drawable/ic_action_group"
+        android:title="@string/action_create_group"
+        android:icon="@drawable/ic_action_add_group"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 </menu>

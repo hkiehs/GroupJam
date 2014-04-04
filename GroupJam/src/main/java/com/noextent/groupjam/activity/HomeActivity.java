@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.noextent.groupjam.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.fragments.AudioPlayerFragment;
 import com.noextent.groupjam.fragments.NavigationDrawerFragment;
 import com.noextent.groupjam.Observable;
 import com.noextent.groupjam.Observer;
@@ -181,7 +182,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             mChatApplication.hostStartChannel();
 
             if (searchMenuItem != null) {
-                searchMenuItem.collapseActionView();
+                MenuItemCompat.collapseActionView(searchMenuItem);
                 searchMenuItem = null;
             }
         }
@@ -214,12 +215,15 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             // getItem is called to instantiate the fragment for the given page.
             // Return a DummySectionFragment (defined as a static inner class
             // below) with the page number as its lone argument.
-            MediaPlayerFragment mediaPlayerFragment = new MediaPlayerFragment(mChatApplication, HomeActivity.this);
+//            MediaPlayerFragment mediaPlayerFragment = new MediaPlayerFragment(mChatApplication, HomeActivity.this);
+
+            AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(mChatApplication, HomeActivity.this);
+
             //Fragment fragment = new DummySectionFragment();
             //Bundle args = new Bundle();
             //args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
             //fragment.setArguments(args);
-            return mediaPlayerFragment;
+            return audioPlayerFragment;
         }
 
         @Override

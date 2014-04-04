@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">GroupJam</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="action_settings">Groups</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Create</string>
-
+    <string name="action_leave_group">Leave Group</string>
+    <string name="action_create_group">Create Group</string>
     <string name="title_media_player">Media Player</string>
     <string name="title_playlist">Playlist</string>
     <string name="select_group">Select a group</string>
+    <string name="default_theme2_track_info_divide">" - "</string>
+    <string name="default_theme2_btn_eq_text">EQ</string>
 
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
