@@ -24,7 +24,15 @@ public class AudioPlayerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_audio_player, container,  false);
-        return rootView;
+        View view = inflater.inflate(R.layout.fragment_audio_player, container,  false);
+
+//        ImageView imageViewAlbum  = (ImageView)view.findViewById(R.id.imageViewAlbum);
+//        Bitmap d = new BitmapDrawable(mChatApplication.mContext.getResources() , w.photo.getAbsolutePath().getBitmap());
+//        int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );
+//        Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
+//        imageViewAlbum.setImageBitmap(scaled);
+
+
+        return view;
     }
 }

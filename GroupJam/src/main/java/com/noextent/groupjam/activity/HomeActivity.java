@@ -149,6 +149,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         MenuItem searchItem = menu.findItem(R.id.action_add_group);
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_GO);
+        mSearchView.setQueryHint("Group name");
         mSearchView.setOnQueryTextListener(this);
         showActionBar();
         return true;
