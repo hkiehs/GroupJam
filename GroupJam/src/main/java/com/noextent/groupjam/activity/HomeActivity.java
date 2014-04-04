@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.noextent.groupjam.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.NavigationDrawerFragment;
+import com.noextent.groupjam.fragments.NavigationDrawerFragment;
 import com.noextent.groupjam.Observable;
 import com.noextent.groupjam.Observer;
 import com.noextent.groupjam.R;
@@ -75,7 +75,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_home);
 
         MusicPlayerApplication.mContext = this;
-
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -141,6 +140,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     private SearchView mSearchView;
+    private MenuItem searchMenuItem;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -149,32 +149,27 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_GO);
         mSearchView.setOnQueryTextListener(this);
-//        MenuItem item = menu.findItem(R.id.action_show_group);
-//        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
-//        notifCount = (Button) MenuItemCompat.getActionView(item);
-//        notifCount.setText("2");
         showActionBar();
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        int id = menuItem.getItemId();
         if (id == R.id.action_add_group) {
-            Toast.makeText(HomeActivity.this, "Create group", Toast.LENGTH_SHORT).show();
             mSearchView.setIconified(false);
+            searchMenuItem = menuItem;
             return true;
         }
 
-//        if (id == R.id.action_show_group) {
-//            Toast.makeText(HomeActivity.this, "Show group", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
+        if (id == R.id.action_leave_group) {
+            Toast.makeText(HomeActivity.this, "All groups removed", Toast.LENGTH_SHORT).show();
+            getSupportActionBar().setSubtitle("No group selected");
+            mChatApplication.useLeaveChannel();
+            return true;
+        }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(menuItem);
     }
 
     @Override
@@ -184,6 +179,11 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             mChatApplication.hostSetChannelName(text);
             mChatApplication.hostInitChannel();
             mChatApplication.hostStartChannel();
+
+            if (searchMenuItem != null) {
+                searchMenuItem.collapseActionView();
+                searchMenuItem = null;
+            }
         }
         return true;
     }

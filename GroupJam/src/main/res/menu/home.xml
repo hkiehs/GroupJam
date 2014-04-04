@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.noextent.groupjam.activity.HomeActivity" >
 
+    <item android:id="@+id/action_leave_group"
+        android:title="@string/action_settings"
+        android:icon="@android:drawable/ic_delete"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_add_group"
         android:title="@string/action_example"
         android:icon="@drawable/ic_action_group"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
-
-    <!--<item android:id="@+id/action_show_group"-->
-        <!--android:title="@string/action_settings"-->
-        <!--android:orderInCategory="100"-->
-        <!--app:showAsAction="ifRoom" />-->
 </menu>

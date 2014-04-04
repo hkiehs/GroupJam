@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.noextent.groupjam.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -100,7 +102,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
-                android.R.id.text1, new String[]{"Example 1", "Example 2"}));
+                android.R.id.text1, new String[]{"User 1", "User 2"}));
 
 
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
