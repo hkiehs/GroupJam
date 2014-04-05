@@ -14,7 +14,7 @@
  *    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.noextent.groupjam;
+package com.noextent.groupjam.utility;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -22,6 +22,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
+
+import com.noextent.groupjam.R;
+import com.noextent.groupjam.activity.HostActivity;
+import com.noextent.groupjam.activity.PlayerActivity;
+import com.noextent.groupjam.utility.Utility;
 
 public class TabWidget extends TabActivity {
     private static final String TAG = "chat.TabWidget";

@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.callbacks;
 
 public interface DownloadInterface {
     public void onDownloadSuccess(byte[] data);

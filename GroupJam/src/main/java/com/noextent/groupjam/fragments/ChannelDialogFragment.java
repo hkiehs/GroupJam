@@ -43,9 +43,9 @@ public class ChannelDialogFragment extends DialogFragment {
         builder.setTitle(R.string.select_group).setAdapter(channelListAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO leave any already joined channel
+                // leave any already joined channel
                 application.useLeaveChannel();
-                application.useSetChannelName("Not set");
+                application.useSetChannelName("No group selected");
 
                 Log.i(LOG_TAG, "Selected group [" + channels.get(which) + "]");
                 String channelName = channels.get(which);

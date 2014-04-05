@@ -14,7 +14,7 @@
  *    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.noextent.groupjam;
+package com.noextent.groupjam.utility;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -28,6 +28,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.R;
+import com.noextent.groupjam.activity.PlayerActivity;
 
 import java.util.List;
 

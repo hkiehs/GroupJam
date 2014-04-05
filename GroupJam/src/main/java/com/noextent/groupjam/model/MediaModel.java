@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.model;
 
 import com.google.gson.Gson;
 

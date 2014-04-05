@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,6 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.noextent.groupjam.utility.DialogBuilder;
+import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.callbacks.Observable;
+import com.noextent.groupjam.callbacks.Observer;
+import com.noextent.groupjam.R;
+import com.noextent.groupjam.service.AllJoynService;
 
 public class HostActivity extends Activity implements Observer {
     private static final String TAG = "chat.HostActivity";
@@ -97,32 +104,32 @@ public class HostActivity extends Activity implements Observer {
     protected Dialog onCreateDialog(int id) {
         Log.i(TAG, "onCreateDialog()");
         Dialog result = null;
-//        switch(id) {
-//        case DIALOG_SET_NAME_ID:
-//	        {
+        switch(id) {
+        case DIALOG_SET_NAME_ID:
+	        {
         DialogBuilder builder = new DialogBuilder();
         result = builder.createHostNameDialog(this, mChatApplication);
-//	        }
-//        	break;
-//        case DIALOG_START_ID:
-//	        {
-//	        	DialogBuilder builder = new DialogBuilder();
-//	        	result = builder.createHostStartDialog(this, mChatApplication);
-//	        }
-//            break;
-//        case DIALOG_STOP_ID:
-//	        {
-//	        	DialogBuilder builder = new DialogBuilder();
-//	        	result = builder.createHostStopDialog(this, mChatApplication);
-//	        }
-//	        break;
-//	    case DIALOG_ALLJOYN_ERROR_ID:
-//	        {
-//	        	DialogBuilder builder = new DialogBuilder();
-//	        	result = builder.createAllJoynErrorDialog(this, mChatApplication);
-//	        }
-//	        break;
-//        }
+	        }
+        	break;
+        case DIALOG_START_ID:
+	        {
+	        	DialogBuilder builder = new DialogBuilder();
+	        	result = builder.createHostStartDialog(this, mChatApplication);
+	        }
+            break;
+        case DIALOG_STOP_ID:
+	        {
+	        	DialogBuilder builder = new DialogBuilder();
+	        	result = builder.createHostStopDialog(this, mChatApplication);
+	        }
+	        break;
+	    case DIALOG_ALLJOYN_ERROR_ID:
+	        {
+	        	DialogBuilder builder = new DialogBuilder();
+	        	result = builder.createAllJoynErrorDialog(this, mChatApplication);
+	        }
+	        break;
+        }
         return result;
     }
 

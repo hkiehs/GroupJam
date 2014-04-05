@@ -46,10 +46,10 @@
         </activity>
 
         <activity
-            android:name="com.noextent.groupjam.HostActivity"
+            android:name=".activity.HostActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".AllJoynService" />
+        <service android:name=".service.AllJoynService" />
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver">

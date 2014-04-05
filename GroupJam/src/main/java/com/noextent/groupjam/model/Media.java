@@ -1,5 +1,6 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.model;
 
+import com.noextent.groupjam.utility.Utility;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;

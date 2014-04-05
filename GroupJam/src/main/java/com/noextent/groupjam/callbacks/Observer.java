@@ -13,8 +13,10 @@
  *    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  *    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-package com.noextent.groupjam;
+package com.noextent.groupjam.callbacks;
 
+
+import com.noextent.groupjam.callbacks.Observable;
 
 public interface Observer {
     public void update(Observable o, Object arg);

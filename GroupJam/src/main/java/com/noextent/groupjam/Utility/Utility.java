@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.utility;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -6,6 +6,11 @@ import android.media.MediaPlayer;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.noextent.groupjam.activity.PlayerActivity;
+import com.noextent.groupjam.callbacks.DownloadInterface;
+import com.noextent.groupjam.callbacks.RegisterInterface;
+import com.noextent.groupjam.model.Device;
+import com.noextent.groupjam.model.Media;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;

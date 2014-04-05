@@ -23,6 +23,12 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import com.noextent.groupjam.callbacks.Observable;
+import com.noextent.groupjam.callbacks.Observer;
+import com.noextent.groupjam.model.Device;
+import com.noextent.groupjam.model.Group;
+import com.noextent.groupjam.model.Media;
+import com.noextent.groupjam.service.AllJoynService;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseObject;

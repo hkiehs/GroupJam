@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.noextent.groupjam.MediaModel;
+import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.Utility;
+import com.noextent.groupjam.utility.Utility;
 import com.noextent.groupjam.callbacks.GroupInterface;
 
 public class MediaPlayerFragment extends Fragment {
@@ -89,8 +89,6 @@ public class MediaPlayerFragment extends Fragment {
                 }, 300);
             }
         });
-
-
         return rootView;
     }
 

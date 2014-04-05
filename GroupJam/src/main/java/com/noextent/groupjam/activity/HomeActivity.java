@@ -22,13 +22,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.noextent.groupjam.AllJoynService;
+import com.noextent.groupjam.service.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.Observable;
-import com.noextent.groupjam.Observer;
+import com.noextent.groupjam.callbacks.Observable;
+import com.noextent.groupjam.callbacks.Observer;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
 import com.noextent.groupjam.fragments.AudioPlayerFragment;
+import com.noextent.groupjam.fragments.ChannelDialogFragment;
 import com.noextent.groupjam.fragments.NavigationDrawerFragment;
 
 import java.util.Locale;
@@ -165,9 +166,13 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         }
 
         if (id == R.id.action_leave_group) {
-            Toast.makeText(HomeActivity.this, "All groups removed", Toast.LENGTH_SHORT).show();
-            getSupportActionBar().setSubtitle("No group selected");
-            mChatApplication.useLeaveChannel();
+            // Toast.makeText(HomeActivity.this, "All groups removed", Toast.LENGTH_SHORT).show();
+            // getSupportActionBar().setSubtitle("No group selected");
+            // mChatApplication.useLeaveChannel();
+
+            ChannelDialogFragment channelDialogFragment = new ChannelDialogFragment(mChatApplication, HomeActivity.this);
+            channelDialogFragment.show(getSupportFragmentManager(), "dialog");
+
             return true;
         }
 
@@ -178,8 +183,13 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String text) {
         if (text.length() > 0) {
             Toast.makeText(this, "Channel created :: " + text, Toast.LENGTH_LONG).show();
+            // stop any channel running
+            mChatApplication.hostStopChannel();
+
+            // set group name
             mChatApplication.hostSetChannelName(text);
             mChatApplication.hostInitChannel();
+            // start group
             mChatApplication.hostStartChannel();
 
             if (searchMenuItem != null) {

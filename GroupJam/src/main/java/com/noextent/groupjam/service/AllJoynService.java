@@ -1,4 +1,4 @@
-package com.noextent.groupjam;
+package com.noextent.groupjam.service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -10,6 +10,15 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
+import com.noextent.groupjam.callbacks.ChatInterface;
+import com.noextent.groupjam.model.MediaModel;
+import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.callbacks.Observable;
+import com.noextent.groupjam.callbacks.Observer;
+import com.noextent.groupjam.R;
+import com.noextent.groupjam.utility.TabWidget;
+import com.noextent.groupjam.utility.Utility;
 
 import org.alljoyn.bus.BusAttachment;
 import org.alljoyn.bus.BusException;
