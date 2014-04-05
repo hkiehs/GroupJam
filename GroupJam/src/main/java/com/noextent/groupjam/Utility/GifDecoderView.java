@@ -1,4 +1,4 @@
-package com.noextent.groupjam.Utility;
+package com.noextent.groupjam.utility;
 
 import android.content.Context;
 import android.graphics.Bitmap;

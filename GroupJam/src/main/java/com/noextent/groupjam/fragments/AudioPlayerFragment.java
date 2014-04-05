@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.Utility.GifDecoderView;
+import com.noextent.groupjam.utility.GifDecoderView;
 import com.noextent.groupjam.callbacks.GroupInterface;
 
 import java.io.IOException;
