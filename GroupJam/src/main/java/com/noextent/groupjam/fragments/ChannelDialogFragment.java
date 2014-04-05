@@ -56,8 +56,7 @@ public class ChannelDialogFragment extends DialogFragment {
                 if (lastDot >= 0) {
                     groupInterface.onGroupSelected(channelName.substring(lastDot + 1));
                     Toast.makeText(getActivity(), channelName + " joined", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     application.useLeaveChannel();
                     groupInterface.onGroupSelected("No group selected");
                 }

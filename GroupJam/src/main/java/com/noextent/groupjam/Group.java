@@ -12,23 +12,23 @@ import com.parse.ParseObject;
 @ParseClassName("Group")
 public class Group extends ParseObject {
 
-	public Group() {
-		// A default constructor is required.
-	}
+    public Group() {
+        // A default constructor is required.
+    }
 
-	public void setSlaveDevice(Device device) {
-		put("slaveDevice", device);
-	}
+    public void setSlaveDevice(Device device) {
+        put("slaveDevice", device);
+    }
 
-	public Device getSlaveDevice() {
-		return (Device) getParseObject("slaveDevice");
-	}
+    public Device getSlaveDevice() {
+        return (Device) getParseObject("slaveDevice");
+    }
 
-	public void setMasterDevice(Device device) {
-		put("masterDevice", device);
-	}
+    public void setMasterDevice(Device device) {
+        put("masterDevice", device);
+    }
 
-	public Device getMasterDevice() {
-		return (Device) getParseObject("masterDevice");
-	}
+    public Device getMasterDevice() {
+        return (Device) getParseObject("masterDevice");
+    }
 }

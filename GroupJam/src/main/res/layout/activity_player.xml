@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
-        <TableRow android:gravity="center" >
+        <TableRow android:gravity="center">
 
             <TextView android:text="Channel Name:  " />
 
@@ -18,7 +18,7 @@
                 android:text="1234567890" />
         </TableRow>
 
-        <TableRow android:gravity="center" >
+        <TableRow android:gravity="center">
 
             <TextView android:text="Channel Status:  " />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/useJoin"

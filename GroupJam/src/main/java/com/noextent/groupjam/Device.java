@@ -11,26 +11,26 @@ import com.parse.ParseObject;
 
 @ParseClassName("Device")
 public class Device extends ParseObject {
-	public static final String TABLE = "Device";
-	public static final String DEVICE_ID = "deviceId";
+    public static final String TABLE = "Device";
+    public static final String DEVICE_ID = "deviceId";
 
-	public Device() {
-		// A default constructor is required.
-	}
-	
-	public String getDeviceName() {
-		return getString("deviceName");
-	}
+    public Device() {
+        // A default constructor is required.
+    }
 
-	public void setDeviceName(String title) {
-		put("deviceName", title);
-	}
+    public String getDeviceName() {
+        return getString("deviceName");
+    }
 
-	public String getDeviceId() {
-		return getString("deviceId");
-	}
+    public void setDeviceName(String title) {
+        put("deviceName", title);
+    }
 
-	public void setDeviceId(String deviceId) {
-		put("deviceId", deviceId);
-	}
+    public String getDeviceId() {
+        return getString("deviceId");
+    }
+
+    public void setDeviceId(String deviceId) {
+        put("deviceId", deviceId);
+    }
 }

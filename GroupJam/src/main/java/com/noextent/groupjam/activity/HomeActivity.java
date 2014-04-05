@@ -24,13 +24,12 @@ import android.widget.Toast;
 
 import com.noextent.groupjam.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.fragments.AudioPlayerFragment;
-import com.noextent.groupjam.fragments.NavigationDrawerFragment;
 import com.noextent.groupjam.Observable;
 import com.noextent.groupjam.Observer;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
-import com.noextent.groupjam.fragments.MediaPlayerFragment;
+import com.noextent.groupjam.fragments.AudioPlayerFragment;
+import com.noextent.groupjam.fragments.NavigationDrawerFragment;
 
 import java.util.Locale;
 
@@ -142,6 +141,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
 
     private SearchView mSearchView;
     private MenuItem searchMenuItem;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -197,8 +197,8 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
 
     @Override
     public void onGroupSelected(String group) {
-        if (group!=null)
-           getSupportActionBar().setSubtitle(group);
+        if (group != null)
+            getSupportActionBar().setSubtitle(group);
     }
 
     /**
@@ -263,7 +263,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_media_player, container,  false);
+            View rootView = inflater.inflate(R.layout.fragment_media_player, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -289,7 +289,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
          * we need to "check in" with the application so it can ensure that our
          * required services are running.
          */
-        mChatApplication = (MusicPlayerApplication)getApplication();
+        mChatApplication = (MusicPlayerApplication) getApplication();
         mChatApplication.checkin();
 
         /*
@@ -307,14 +307,14 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     public void onDestroy() {
-        mChatApplication = (MusicPlayerApplication)getApplication();
+        mChatApplication = (MusicPlayerApplication) getApplication();
         mChatApplication.deleteObserver(this);
         super.onDestroy();
- 	}
+    }
 
     public synchronized void update(Observable o, Object arg) {
         Log.i(TAG, "update(" + arg + ")");
-        String qualifier = (String)arg;
+        String qualifier = (String) arg;
 
         if (qualifier.equals(MusicPlayerApplication.APPLICATION_QUIT_EVENT)) {
             Message message = mHandler.obtainMessage(HANDLE_APPLICATION_QUIT_EVENT);
@@ -333,33 +333,33 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     private void updateChannelState() {
-    	AllJoynService.HostChannelState channelState = mChatApplication.hostGetChannelState();
-    	String name = mChatApplication.hostGetChannelName();
-    	boolean haveName = true;
-    	if (name == null) {
-    		haveName = false;
-    		name = "Not set";
-    	}
+        AllJoynService.HostChannelState channelState = mChatApplication.hostGetChannelState();
+        String name = mChatApplication.hostGetChannelName();
+        boolean haveName = true;
+        if (name == null) {
+            haveName = false;
+            name = "Not set";
+        }
         //mChannelName.setText(name);
         switch (channelState) {
-        case IDLE:
+            case IDLE:
 //            mChannelStatus.setText("Idle");
-            break;
-        case NAMED:
+                break;
+            case NAMED:
 //            mChannelStatus.setText("Named");
-            break;
-        case BOUND:
+                break;
+            case BOUND:
 //            mChannelStatus.setText("Bound");
-            break;
-        case ADVERTISED:
+                break;
+            case ADVERTISED:
 //            mChannelStatus.setText("Advertised");
-            break;
-        case CONNECTED:
+                break;
+            case CONNECTED:
 //            mChannelStatus.setText("Connected");
-            break;
-        default:
+                break;
+            default:
 //            mChannelStatus.setText("Unknown");
-            break;
+                break;
         }
 
 //        if (channelState == AllJoynService.HostChannelState.IDLE) {
@@ -378,10 +378,10 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
     private void alljoynError() {
-    	if (mChatApplication.getErrorModule() == MusicPlayerApplication.Module.GENERAL ||
-    		mChatApplication.getErrorModule() == MusicPlayerApplication.Module.USE) {
-    		showDialog(DIALOG_ALLJOYN_ERROR_ID);
-    	}
+        if (mChatApplication.getErrorModule() == MusicPlayerApplication.Module.GENERAL ||
+                mChatApplication.getErrorModule() == MusicPlayerApplication.Module.USE) {
+            showDialog(DIALOG_ALLJOYN_ERROR_ID);
+        }
     }
 
     private static final int HANDLE_APPLICATION_QUIT_EVENT = 0;
@@ -391,26 +391,23 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-	            case HANDLE_APPLICATION_QUIT_EVENT:
-	            {
-	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_APPLICATION_QUIT_EVENT");
-	                finish();
-	            }
-	            break;
-            case HANDLE_CHANNEL_STATE_CHANGED_EVENT:
-	            {
-	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_CHANNEL_STATE_CHANGED_EVENT");
-	                updateChannelState();
-	            }
+                case HANDLE_APPLICATION_QUIT_EVENT: {
+                    Log.i(TAG, "mHandler.handleMessage(): HANDLE_APPLICATION_QUIT_EVENT");
+                    finish();
+                }
                 break;
-            case HANDLE_ALLJOYN_ERROR_EVENT:
-            {
-                Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
-                alljoynError();
-            }
-            break;
-            default:
+                case HANDLE_CHANNEL_STATE_CHANGED_EVENT: {
+                    Log.i(TAG, "mHandler.handleMessage(): HANDLE_CHANNEL_STATE_CHANGED_EVENT");
+                    updateChannelState();
+                }
                 break;
+                case HANDLE_ALLJOYN_ERROR_EVENT: {
+                    Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
+                    alljoynError();
+                }
+                break;
+                default:
+                    break;
             }
         }
     };

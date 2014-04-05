@@ -1,14 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.noextent.groupjam.activity.HomeActivity" >
+    tools:context="com.noextent.groupjam.activity.HomeActivity">
 
-    <item android:id="@+id/action_leave_group"
+    <item
+        android:id="@+id/action_leave_group"
         android:title="@string/action_leave_group"
         android:icon="@drawable/ic_action_close_group"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_add_group"
+    <item
+        android:id="@+id/action_add_group"
         android:title="@string/action_create_group"
         android:icon="@drawable/ic_action_add_group"
         app:actionViewClass="android.support.v7.widget.SearchView"

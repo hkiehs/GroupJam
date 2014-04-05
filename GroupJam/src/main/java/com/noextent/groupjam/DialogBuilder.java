@@ -41,7 +41,7 @@ public class DialogBuilder {
         dialog.setContentView(R.layout.usejoindialog);
 
         ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(activity, android.R.layout.test_list_item);
-        final ListView channelList = (ListView)dialog.findViewById(R.id.useJoinChannelList);
+        final ListView channelList = (ListView) dialog.findViewById(R.id.useJoinChannelList);
         channelList.setAdapter(channelListAdapter);
 
         List<String> channels = application.getFoundChannels();
@@ -60,7 +60,7 @@ public class DialogBuilder {
                 String name = channelList.getItemAtPosition(position).toString();
                 application.useSetChannelName(name);
                 application.useJoinChannel();
-				/*
+                /*
 				 * Android likes to reuse dialogs for performance reasons.  If
 				 * we reuse this one, the list of channels will eventually be
 				 * wrong since it can change.  We have to tell the Android
@@ -70,7 +70,7 @@ public class DialogBuilder {
             }
         });
 
-        Button cancel = (Button)dialog.findViewById(R.id.useJoinCancel);
+        Button cancel = (Button) dialog.findViewById(R.id.useJoinCancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 				/*
@@ -92,7 +92,7 @@ public class DialogBuilder {
         dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.useleavedialog);
 
-        Button yes = (Button)dialog.findViewById(R.id.useLeaveOk);
+        Button yes = (Button) dialog.findViewById(R.id.useLeaveOk);
         yes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 application.useLeaveChannel();
@@ -101,7 +101,7 @@ public class DialogBuilder {
             }
         });
 
-        Button no = (Button)dialog.findViewById(R.id.useLeaveCancel);
+        Button no = (Button) dialog.findViewById(R.id.useLeaveCancel);
         no.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.cancel();
@@ -117,7 +117,7 @@ public class DialogBuilder {
         dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.hostnamedialog);
 
-        final EditText channel = (EditText)dialog.findViewById(R.id.hostNameChannel);
+        final EditText channel = (EditText) dialog.findViewById(R.id.hostNameChannel);
         channel.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
@@ -130,7 +130,7 @@ public class DialogBuilder {
             }
         });
 
-        Button okay = (Button)dialog.findViewById(R.id.hostNameOk);
+        Button okay = (Button) dialog.findViewById(R.id.hostNameOk);
         okay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String name = channel.getText().toString();
@@ -140,7 +140,7 @@ public class DialogBuilder {
             }
         });
 
-        Button cancel = (Button)dialog.findViewById(R.id.hostNameCancel);
+        Button cancel = (Button) dialog.findViewById(R.id.hostNameCancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.cancel();
@@ -156,7 +156,7 @@ public class DialogBuilder {
         dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.hoststartdialog);
 
-        Button yes = (Button)dialog.findViewById(R.id.hostStartOk);
+        Button yes = (Button) dialog.findViewById(R.id.hostStartOk);
         yes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 application.hostStartChannel();
@@ -164,7 +164,7 @@ public class DialogBuilder {
             }
         });
 
-        Button no = (Button)dialog.findViewById(R.id.hostStartCancel);
+        Button no = (Button) dialog.findViewById(R.id.hostStartCancel);
         no.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.cancel();
@@ -180,7 +180,7 @@ public class DialogBuilder {
         dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.hoststopdialog);
 
-        Button yes = (Button)dialog.findViewById(R.id.hostStopOk);
+        Button yes = (Button) dialog.findViewById(R.id.hostStopOk);
         yes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 application.hostStopChannel();
@@ -188,7 +188,7 @@ public class DialogBuilder {
             }
         });
 
-        Button no = (Button)dialog.findViewById(R.id.hostStopCancel);
+        Button no = (Button) dialog.findViewById(R.id.hostStopCancel);
         no.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.cancel();
@@ -204,10 +204,10 @@ public class DialogBuilder {
         dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.alljoynerrordialog);
 
-        TextView errorText = (TextView)dialog.findViewById(R.id.errorDescription);
+        TextView errorText = (TextView) dialog.findViewById(R.id.errorDescription);
         errorText.setText(application.getErrorString());
 
-        Button yes = (Button)dialog.findViewById(R.id.errorOk);
+        Button yes = (Button) dialog.findViewById(R.id.errorOk);
         yes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.cancel();

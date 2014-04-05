@@ -17,5 +17,5 @@ package com.noextent.groupjam;
 
 
 public interface Observer {
-	public void update(Observable o, Object arg);
+    public void update(Observable o, Object arg);
 }
