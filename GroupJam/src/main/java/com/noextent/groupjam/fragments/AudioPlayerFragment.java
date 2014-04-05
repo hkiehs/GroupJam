@@ -1,5 +1,6 @@
 package com.noextent.groupjam.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,32 +33,47 @@ public class AudioPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audio_player, container, false);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeParentLayout);
-
-        showGif(relativeLayout);
+        ViewGif viewGif = new ViewGif(relativeLayout);
+        viewGif.execute();
 
         return view;
     }
 
-    private void showGif(RelativeLayout relativeLayout) {
-        final int low = 1; // inclusive
-        final int high = 11; // exclusive
-        Random r = new Random();
-        final int number = r.nextInt(high-low) + low;
+    private class ViewGif extends AsyncTask<Void, Void, InputStream> {
+        private RelativeLayout relativeLayout;
+        private int dpAsPixels;
 
-        InputStream stream = null;
-        try {
-            stream = getActivity().getAssets().open("gif/Preloader_"+ number +".gif");
-        } catch (IOException e) {
-            e.printStackTrace();
+        public ViewGif(RelativeLayout relativeLayout) {
+            this.relativeLayout = relativeLayout;
         }
 
-        GifDecoderView gifDecoderView = new GifDecoderView(getActivity(), stream);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        float scale = getResources().getDisplayMetrics().density;
-        int dpAsPixels = (int) (200 * scale + 0.5f);
-        gifDecoderView.setPadding(0, 0, 0, dpAsPixels);
-        gifDecoderView.setLayoutParams(layoutParams);
-        relativeLayout.addView(gifDecoderView);
+        protected InputStream doInBackground(Void... params) {
+            final int low = 1; // inclusive
+            final int high = 11; // exclusive
+            Random r = new Random();
+            final int number = r.nextInt(high-low) + low;
+
+            InputStream stream = null;
+            try {
+                stream = getActivity().getAssets().open("gif/Preloader_"+ number +".gif");
+                float scale = getResources().getDisplayMetrics().density;
+                dpAsPixels = (int) (200 * scale + 0.5f);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return stream;
+        }
+
+        protected void onPostExecute(InputStream inputStream) {
+            if (inputStream != null) {
+                GifDecoderView gifDecoderView = new GifDecoderView(getActivity(), inputStream);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                gifDecoderView.setPadding(0, 0, 0, dpAsPixels);
+                gifDecoderView.setLayoutParams(layoutParams);
+                relativeLayout.addView(gifDecoderView, layoutParams);
+            }
+        }
     }
+
 }
