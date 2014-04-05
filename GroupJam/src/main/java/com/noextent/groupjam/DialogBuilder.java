@@ -61,7 +61,7 @@ public class DialogBuilder {
                 application.useSetChannelName(name);
                 application.useJoinChannel();
                 /*
-				 * Android likes to reuse dialogs for performance reasons.  If
+                 * Android likes to reuse dialogs for performance reasons.  If
 				 * we reuse this one, the list of channels will eventually be
 				 * wrong since it can change.  We have to tell the Android
 				 * application framework to forget about this dialog completely.

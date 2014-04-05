@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import java.io.InputStream;
-
 public class GifDecoderView extends ImageView {
 
     private boolean mIsPlayingGif = false;
@@ -25,14 +23,13 @@ public class GifDecoderView extends ImageView {
         }
     };
 
-    public GifDecoderView(Context context, InputStream stream) {
+    public GifDecoderView(Context context) {
         super(context);
-        playGif(stream);
     }
 
-    private void playGif(InputStream stream) {
-        mGifDecoder = new GifDecoder();
-        mGifDecoder.read(stream);
+    public void playGif(GifDecoder gifDecoder) {
+        mGifDecoder = gifDecoder;
+        //mGifDecoder.read(stream);
 
         mIsPlayingGif = true;
 

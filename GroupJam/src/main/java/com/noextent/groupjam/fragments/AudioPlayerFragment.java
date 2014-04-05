@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.utility.GifDecoder;
 import com.noextent.groupjam.utility.GifDecoderView;
 
 import java.io.IOException;
@@ -39,41 +40,51 @@ public class AudioPlayerFragment extends Fragment {
         return view;
     }
 
-    private class ViewGif extends AsyncTask<Void, Void, InputStream> {
+    private class ViewGif extends AsyncTask<Void, Void, Boolean> {
+        private GifDecoderView gifDecoderView;
         private RelativeLayout relativeLayout;
-        private int dpAsPixels;
 
         public ViewGif(RelativeLayout relativeLayout) {
             this.relativeLayout = relativeLayout;
         }
 
-        protected InputStream doInBackground(Void... params) {
+        protected void onPreExecute() {
+            gifDecoderView = new GifDecoderView(getActivity());
+        }
+
+        protected Boolean doInBackground(Void... params) {
             final int low = 1; // inclusive
             final int high = 11; // exclusive
             Random r = new Random();
-            final int number = r.nextInt(high-low) + low;
+            final int number = r.nextInt(high - low) + low;
 
-            InputStream stream = null;
+            InputStream inputStream = null;
             try {
-                stream = getActivity().getAssets().open("gif/Preloader_"+ number +".gif");
-                float scale = getResources().getDisplayMetrics().density;
-                dpAsPixels = (int) (200 * scale + 0.5f);
+                inputStream = getActivity().getAssets().open("gif/Preloader_" + number + ".gif");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return stream;
-        }
 
-        protected void onPostExecute(InputStream inputStream) {
             if (inputStream != null) {
-                GifDecoderView gifDecoderView = new GifDecoderView(getActivity(), inputStream);
+                float scale = getResources().getDisplayMetrics().density;
+                int dpAsPixels = (int) (200 * scale + 0.5f);
+
+                GifDecoder mGifDecoder = new GifDecoder();
+                mGifDecoder.read(inputStream);
+                gifDecoderView.playGif(mGifDecoder);
+
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
                 gifDecoderView.setPadding(0, 0, 0, dpAsPixels);
                 gifDecoderView.setLayoutParams(layoutParams);
-                relativeLayout.addView(gifDecoderView, layoutParams);
+                return true;
             }
+            return false;
+        }
+
+        protected void onPostExecute(Boolean status) {
+            if (status)
+                relativeLayout.addView(gifDecoderView);
         }
     }
-
 }

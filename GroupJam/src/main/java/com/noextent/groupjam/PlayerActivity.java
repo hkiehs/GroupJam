@@ -93,7 +93,7 @@ public class PlayerActivity extends HomeActivity implements Observer, RegisterIn
         mChatApplication.checkin();
 
 		/*
-		 * Call down into the model to get its current state. Since the model
+         * Call down into the model to get its current state. Since the model
 		 * outlives its Activities, this may actually be a lot of state and not
 		 * just empty.
 		 */

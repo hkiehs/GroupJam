@@ -705,7 +705,7 @@ public class AllJoynService extends Service implements Observer {
         mBus.registerBusListener(mBusListener);
 
 		/*
-		 * To make a service available to other AllJoyn peers, first register a
+         * To make a service available to other AllJoyn peers, first register a
 		 * BusObject with the BusAttachment at a specific object path. Our
 		 * service is implemented by the ChatService BusObject found at the
 		 * "/chatService" object path.
