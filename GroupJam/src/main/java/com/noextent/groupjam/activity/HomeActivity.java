@@ -22,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.noextent.groupjam.fragments.PlaylistFragment;
 import com.noextent.groupjam.service.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.callbacks.Observable;
@@ -223,18 +224,13 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a DummySectionFragment (defined as a static inner class
-            // below) with the page number as its lone argument.
-//            MediaPlayerFragment mediaPlayerFragment = new MediaPlayerFragment(mChatApplication, HomeActivity.this);
-
-            AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(mChatApplication, HomeActivity.this);
-
-            //Fragment fragment = new DummySectionFragment();
-            //Bundle args = new Bundle();
-            //args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-            //fragment.setArguments(args);
-            return audioPlayerFragment;
+            if (position == 0) {
+                AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(mChatApplication, HomeActivity.this);
+                return audioPlayerFragment;
+            } else {
+                PlaylistFragment playlistFragment = new PlaylistFragment();
+                return playlistFragment;
+            }
         }
 
         @Override

@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.Random;
 
 public class AudioPlayerFragment extends Fragment {
-    public static final String LOG_TAG = "MediaPlayerFragment";
+    public static final String LOG_TAG = "AudioPlayerFragment";
 
     private MusicPlayerApplication mChatApplication;
     private GroupInterface groupInterface;
