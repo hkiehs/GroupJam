@@ -9,11 +9,12 @@ import android.widget.RelativeLayout;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.utility.GifDecoderView;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.utility.GifDecoderView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 public class AudioPlayerFragment extends Fragment {
     public static final String LOG_TAG = "MediaPlayerFragment";
@@ -30,16 +31,27 @@ public class AudioPlayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audio_player, container, false);
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeParentLayout);
+
+        showGif(relativeLayout);
+
+        return view;
+    }
+
+    private void showGif(RelativeLayout relativeLayout) {
+        final int low = 1; // inclusive
+        final int high = 11; // exclusive
+        Random r = new Random();
+        final int number = r.nextInt(high-low) + low;
 
         InputStream stream = null;
         try {
-            stream = getActivity().getAssets().open("preloader.gif");
+            stream = getActivity().getAssets().open("gif/Preloader_"+ number +".gif");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         GifDecoderView gifDecoderView = new GifDecoderView(getActivity(), stream);
-        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeParentLayout);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         float scale = getResources().getDisplayMetrics().density;
@@ -47,7 +59,5 @@ public class AudioPlayerFragment extends Fragment {
         gifDecoderView.setPadding(0, 0, 0, dpAsPixels);
         gifDecoderView.setLayoutParams(layoutParams);
         relativeLayout.addView(gifDecoderView);
-
-        return view;
     }
 }
