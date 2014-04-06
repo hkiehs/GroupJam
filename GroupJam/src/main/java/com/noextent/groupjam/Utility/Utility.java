@@ -10,7 +10,7 @@ import com.noextent.groupjam.activity.PlayerActivity;
 import com.noextent.groupjam.callbacks.DownloadInterface;
 import com.noextent.groupjam.callbacks.RegisterInterface;
 import com.noextent.groupjam.model.Device;
-import com.noextent.groupjam.model.Media;
+import com.noextent.groupjam.model.ParseMedia;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -130,14 +130,14 @@ public class Utility {
                 }
             });
 
-            Media media = new Media();
-            media.setSongName("Iridescent");
-            media.setAlbumName("A Thousand Suns");
-            media.setArtistName("Linkin Park");
-            media.setMediaFile(file);
-            media.setDeviceId(device);
+            ParseMedia parseMedia = new ParseMedia();
+            parseMedia.setSongName("Iridescent");
+            parseMedia.setAlbumName("A Thousand Suns");
+            parseMedia.setArtistName("Linkin Park");
+            parseMedia.setMediaFile(file);
+            parseMedia.setDeviceId(device);
 
-            media.saveInBackground(new SaveCallback() {
+            parseMedia.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
@@ -298,13 +298,13 @@ public class Utility {
 
     public static void receiveMediaFromServer(Device device, String objectId, final DownloadInterface downloadInterface) {
         // request to receive file from server
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(Media.TABLE);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseMedia.TABLE);
         query.whereEqualTo(Utility.OBJECT_ID, objectId);
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> users, ParseException e) {
                 if (e == null) {
                     Log.d(LOG_TAG, "Retrieved " + users.size() + " files");
-                    ParseFile mediaFile = (ParseFile) users.get(0).get(Media.MEDIA_FILE);
+                    ParseFile mediaFile = (ParseFile) users.get(0).get(ParseMedia.MEDIA_FILE);
                     mediaFile.getDataInBackground(new GetDataCallback() {
                         public void done(byte[] data, ParseException e) {
                             if (e == null) {

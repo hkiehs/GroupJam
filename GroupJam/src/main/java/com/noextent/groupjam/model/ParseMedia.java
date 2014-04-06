@@ -6,14 +6,15 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 @ParseClassName("Media")
-public class Media extends ParseObject {
+public class ParseMedia extends ParseObject {
     public static final String TABLE = "Media";
     public static final String SONG_NAME = "songName";
     public static final String ARTIST_NAME = "artistName";
     public static final String ALBUM_NAME = "albumName";
     public static final String MEDIA_FILE = "mediaFile";
+    public static final String CREATED_AT = "createdAt";
 
-    public Media() {
+    public ParseMedia() {
         // A default constructor is required.
     }
 

@@ -27,7 +27,7 @@ import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
 import com.noextent.groupjam.model.Device;
 import com.noextent.groupjam.model.Group;
-import com.noextent.groupjam.model.Media;
+import com.noextent.groupjam.model.ParseMedia;
 import com.noextent.groupjam.service.AllJoynService;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -98,7 +98,7 @@ public class MusicPlayerApplication extends Application implements Observable {
         // setup parse
         ParseObject.registerSubclass(Device.class);
         ParseObject.registerSubclass(Group.class);
-        ParseObject.registerSubclass(Media.class);
+        ParseObject.registerSubclass(ParseMedia.class);
 
         Parse.initialize(this, "nrXYlTqKzxmp0mSynnblthvX5HcwdNykXTNoekWs", "lNCLSapoIIUCVylghKSR0lT4Gvb78FEo7kjHToSd");
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
