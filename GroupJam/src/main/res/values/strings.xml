@@ -9,6 +9,7 @@
     <string name="default_theme2_track_info_divide">" - "</string>
     <string name="default_theme2_btn_eq_text">EQ</string>
     <string name="more_sessions">More sessions</string>
+    <string name="download">Download</string>
     <string name="empty_waiting_for_sync">Waiting for sync&#8230;</string>
 
     <string name="title_section1">Section 1</string>

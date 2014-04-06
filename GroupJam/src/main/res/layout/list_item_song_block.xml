@@ -52,7 +52,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/list_extra_button_background"
         android:scaleType="center"
-        android:src="@drawable/schedule_button_more"
-        android:contentDescription="@string/more_sessions" />
+        android:src="@drawable/ic_action_play"
+        android:contentDescription="@string/download" />
 
 </LinearLayout>
