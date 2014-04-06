@@ -22,7 +22,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.noextent.groupjam.callbacks.RegisterInterface;
 import com.noextent.groupjam.fragments.PlaylistFragment;
+import com.noextent.groupjam.model.Device;
 import com.noextent.groupjam.service.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.callbacks.Observable;
@@ -32,10 +34,11 @@ import com.noextent.groupjam.callbacks.GroupInterface;
 import com.noextent.groupjam.fragments.AudioPlayerFragment;
 import com.noextent.groupjam.fragments.ChannelDialogFragment;
 import com.noextent.groupjam.fragments.NavigationDrawerFragment;
+import com.noextent.groupjam.utility.Utility;
 
 import java.util.Locale;
 
-public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer, GroupInterface {
+public class HomeActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Observer, GroupInterface, RegisterInterface {
 
     private static final String TAG = "HomeActivity";
     /**
@@ -94,6 +97,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        Utility.registerDevice(HomeActivity.this, "Device_Galaxy_Nexus", HomeActivity.this);
     }
 
     private void showActionBar() {
@@ -212,6 +216,33 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             getSupportActionBar().setSubtitle(group);
     }
 
+    @Override
+    public void onRegistrationComplete(Device device) {
+        if (device != null) {
+            Toast.makeText(HomeActivity.this, "Registration completed", Toast.LENGTH_SHORT).show();
+            mChatApplication.mDevice = device;
+            // register for parse push
+            Utility.registerParseInstallation(device);
+
+            //addMessageToList("Registration successful");
+            // upload file to server
+            // INFO: now user should be able to host and retrieve songs from
+            // server send download instruction on the group and download it
+            // locally
+
+            // Utility.downloadMusic(device, Utility.songObjectId, this);
+            //addMessageToList("receiving song... from server");
+        } else {
+            Toast.makeText(HomeActivity.this, "Registration UN-SUCCESSFUL", Toast.LENGTH_SHORT).show();
+            // addMessageToList("Registration un-successful");
+            // Registration failed
+            // show a retry button on the UI to retry registration
+            // User can not proceed further without this step only if he has
+            // something to from/to server. Else all functionalities should be
+            // accessible.
+        }
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -228,7 +259,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
                 AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(mChatApplication, HomeActivity.this);
                 return audioPlayerFragment;
             } else {
-                PlaylistFragment playlistFragment = new PlaylistFragment();
+                PlaylistFragment playlistFragment = new PlaylistFragment(mChatApplication);
                 return playlistFragment;
             }
         }

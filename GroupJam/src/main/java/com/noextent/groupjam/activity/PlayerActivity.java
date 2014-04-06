@@ -283,7 +283,7 @@ public class PlayerActivity extends HomeActivity implements Observer, RegisterIn
             // server send download instruction on the group and download it
             // locally
 
-            Utility.receiveMediaFromServer(device, Utility.songObjectId, this);
+//            Utility.downloadMusic(device, Utility.songObjectId, this);
             addMessageToList("receiving song... from server");
         } else {
             addMessageToList("Registration un-successful");

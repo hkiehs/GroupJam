@@ -260,7 +260,7 @@ public class Utility {
                         Log.d(LOG_TAG, "Old user");
                         registerInterface.onRegistrationComplete((Device) devices.get(0));
                         // Utility.registerParseInstallation(mApplication.mDevice);
-                        // receiveMediaFromServer(mDevice, songObjectId);
+                        // downloadMusic(mDevice, songObjectId);
                         // Utility.uploadFileToServer(MasterActivity.this,
                         // mDevice);
                     } else {
@@ -276,7 +276,7 @@ public class Utility {
                                     registerInterface.onRegistrationComplete(newDevice);
                                     newDevice = null;
                                     // Utility.registerParseInstallation(newDevice);
-                                    // receiveMediaFromServer(newDevice,
+                                    // downloadMusic(newDevice,
                                     // songObjectId);
                                     // Utility.uploadFileToServer(MasterActivity.this,
                                     // newDevice);
@@ -296,7 +296,7 @@ public class Utility {
         });
     }
 
-    public static void receiveMediaFromServer(Device device, String objectId, final DownloadInterface downloadInterface) {
+    public static void downloadMusic(String objectId, final DownloadInterface downloadInterface) {
         // request to receive file from server
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseMedia.TABLE);
         query.whereEqualTo(Utility.OBJECT_ID, objectId);

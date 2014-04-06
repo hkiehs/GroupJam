@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.activity.PlaylistAdapter;
 import com.noextent.groupjam.activity.SimpleSectionedListAdapter;
@@ -15,20 +16,21 @@ import com.noextent.groupjam.activity.SimpleSectionedListAdapter;
 public class PlaylistFragment extends ListFragment {
     public static final String LOG_TAG = "PlaylistFragment";
 
+    private MusicPlayerApplication application;
     private SimpleSectionedListAdapter mAdapter;
     private PlaylistAdapter playlistAdapter;
 
-    public PlaylistFragment() {
+    public PlaylistFragment(MusicPlayerApplication application) {
+        this.application = application;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        playlistAdapter = new PlaylistAdapter(getActivity());
+        playlistAdapter = new PlaylistAdapter(getActivity(), application);
         mAdapter = new SimpleSectionedListAdapter(getActivity(), R.layout.list_item_schedule_header, playlistAdapter);
         setListAdapter(mAdapter);
-
     }
 
     @Override
