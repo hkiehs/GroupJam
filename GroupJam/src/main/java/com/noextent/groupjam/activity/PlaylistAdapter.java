@@ -114,12 +114,21 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             imageButton.setImageDrawable(fragmentActivity.getResources().getDrawable(R.drawable.ic_action_play));
             application.mMediaPlayer = Utility.prepareMediaPlayer(fragmentActivity, application.mMediaPlayer, data);
 
+            ((HomeActivity) fragmentActivity).getActionBar().setSelectedNavigationItem(0);
+
 
             AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(application, parseMedia);
-            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, audioPlayerFragment);
-            // transaction.addToBackStack(null);
-            transaction.commit();
+//            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.container, audioPlayerFragment);
+//            // transaction.addToBackStack(null);
+//            transaction.commit();
+
+//            String AUDIO_TAG = "AudioPlayerFragment";
+//            FragmentTransaction fragmentTransaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+//            fragmentTransaction.replace(R.id.container, audioPlayerFragment, AUDIO_TAG);
+//            fragmentTransaction.addToBackStack(AUDIO_TAG);
+//            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//            fragmentTransaction.commit();
         }
     }
 

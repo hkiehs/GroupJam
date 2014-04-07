@@ -16,8 +16,6 @@
 package com.noextent.groupjam.callbacks;
 
 
-import com.noextent.groupjam.callbacks.Observable;
-
 public interface Observer {
     public void update(Observable o, Object arg);
 }

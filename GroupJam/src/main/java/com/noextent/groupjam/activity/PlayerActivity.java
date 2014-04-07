@@ -11,17 +11,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.noextent.groupjam.utility.DialogBuilder;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.callbacks.RegisterInterface;
-import com.noextent.groupjam.utility.Utility;
 import com.noextent.groupjam.callbacks.DownloadInterface;
 import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
+import com.noextent.groupjam.callbacks.RegisterInterface;
 import com.noextent.groupjam.model.Device;
 import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.service.AllJoynService;
+import com.noextent.groupjam.utility.DialogBuilder;
+import com.noextent.groupjam.utility.Utility;
 
 import java.util.List;
 

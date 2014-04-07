@@ -11,12 +11,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import com.noextent.groupjam.callbacks.ChatInterface;
-import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.R;
+import com.noextent.groupjam.callbacks.ChatInterface;
 import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
-import com.noextent.groupjam.R;
+import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.utility.TabWidget;
 import com.noextent.groupjam.utility.Utility;
 

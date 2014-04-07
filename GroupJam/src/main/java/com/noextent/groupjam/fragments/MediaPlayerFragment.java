@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.utility.Utility;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.model.MediaModel;
+import com.noextent.groupjam.utility.Utility;
 
 public class MediaPlayerFragment extends Fragment {
     public static final String LOG_TAG = "MediaPlayerFragment";

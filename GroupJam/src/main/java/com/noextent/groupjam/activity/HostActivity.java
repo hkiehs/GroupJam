@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.noextent.groupjam.utility.DialogBuilder;
 import com.noextent.groupjam.MusicPlayerApplication;
+import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
-import com.noextent.groupjam.R;
 import com.noextent.groupjam.service.AllJoynService;
+import com.noextent.groupjam.utility.DialogBuilder;
 
 public class HostActivity extends Activity implements Observer {
     private static final String TAG = "chat.HostActivity";

@@ -13,27 +13,23 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.noextent.groupjam.callbacks.RegisterInterface;
-import com.noextent.groupjam.fragments.PlaylistFragment;
-import com.noextent.groupjam.model.Device;
-import com.noextent.groupjam.service.AllJoynService;
 import com.noextent.groupjam.MusicPlayerApplication;
-import com.noextent.groupjam.callbacks.Observable;
-import com.noextent.groupjam.callbacks.Observer;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.callbacks.Observable;
+import com.noextent.groupjam.callbacks.Observer;
+import com.noextent.groupjam.callbacks.RegisterInterface;
 import com.noextent.groupjam.fragments.AudioPlayerFragment;
 import com.noextent.groupjam.fragments.ChannelDialogFragment;
 import com.noextent.groupjam.fragments.NavigationDrawerFragment;
+import com.noextent.groupjam.fragments.PlaylistFragment;
+import com.noextent.groupjam.model.Device;
+import com.noextent.groupjam.service.AllJoynService;
 import com.noextent.groupjam.utility.Utility;
 
 import java.util.Locale;
@@ -280,30 +276,6 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
                     return getString(R.string.title_playlist);
             }
             return null;
-        }
-    }
-
-    /**
-     * A dummy fragment representing a section of the app, but that simply
-     * displays dummy text.
-     */
-    public static class DummySectionFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public DummySectionFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_media_player, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
         }
     }
 

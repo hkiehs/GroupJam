@@ -26,7 +26,6 @@ import android.widget.TabHost;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.activity.HostActivity;
 import com.noextent.groupjam.activity.PlayerActivity;
-import com.noextent.groupjam.utility.Utility;
 
 public class TabWidget extends TabActivity {
     private static final String TAG = "chat.TabWidget";
