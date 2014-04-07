@@ -78,25 +78,6 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
         ImageButton playSong;
     }
 
-    private byte[] download(ParseMedia parseMedia) {
-        byte[] data = null;
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseMedia.TABLE);
-        query.whereEqualTo(Utility.OBJECT_ID, parseMedia.getObjectId());
-        try {
-            List<ParseObject> parseObjects = query.find();
-            if (parseObjects != null && parseObjects.size() > 0) {
-                ParseFile media = (ParseFile) parseObjects.get(0).get(ParseMedia.MEDIA_FILE);
-                data = media.getData();
-                if (data != null) {
-                    return data;
-                }
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private class DownloadSong extends AsyncTask<Void, Void, byte[]> {
         private ParseMedia parseMedia;
         private ImageButton imageButton;
@@ -104,9 +85,11 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             this.parseMedia = parseMedia;
             this.imageButton = imageButton;
         }
+
         protected byte[] doInBackground(Void... params) {
             byte[] data = null;
             ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseMedia.TABLE);
+            query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
             query.whereEqualTo(Utility.OBJECT_ID, parseMedia.getObjectId());
             try {
                 List<ParseObject> parseObjects = query.find();
@@ -127,7 +110,7 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
 
         protected void onPostExecute(byte[] data) {
             Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
-            imageButton.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_add_to_queue));
+            imageButton.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_play));
             application.mMediaPlayer = Utility.prepareMediaPlayer(context, application.mMediaPlayer, data);
         }
     }

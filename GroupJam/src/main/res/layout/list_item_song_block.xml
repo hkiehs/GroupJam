@@ -52,7 +52,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/list_extra_button_background"
         android:scaleType="center"
-        android:src="@drawable/ic_action_play"
+        android:src="@drawable/ic_action_add_to_queue"
         android:contentDescription="@string/download" />
 
 </LinearLayout>

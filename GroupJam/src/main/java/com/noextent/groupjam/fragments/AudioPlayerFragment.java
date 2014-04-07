@@ -2,17 +2,22 @@ package com.noextent.groupjam.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.utility.GifDecoder;
 import com.noextent.groupjam.utility.GifDecoderView;
+import com.noextent.groupjam.utility.Utility;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +34,8 @@ public class AudioPlayerFragment extends Fragment {
         this.groupInterface = groupInterface;
     }
 
+    private ImageButton imgBtnPlay = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +43,44 @@ public class AudioPlayerFragment extends Fragment {
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeParentLayout);
         ViewGif viewGif = new ViewGif(relativeLayout);
         viewGif.execute();
+
+        imgBtnPlay = (ImageButton) view.findViewById(R.id.imageButtonPlay);
+        imgBtnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mChatApplication.mMediaPlayer != null) {
+                    int position = mChatApplication.mMediaPlayer.getCurrentPosition();
+
+                    MediaModel mMediaModel = new MediaModel();
+                    mMediaModel.playBackPosition = position;
+
+                    if (mChatApplication.mMediaPlayer.isPlaying()) {
+                        mMediaModel.action = Utility.STATUS_PAUSE;
+                        mChatApplication.newLocalUserMessage(mMediaModel.toJson());
+                        imgBtnPlay.setBackgroundResource(R.drawable.ic_action_play);
+                    } else {
+                        mMediaModel.action = Utility.STATUS_PLAY;
+                        mChatApplication.newLocalUserMessage(mMediaModel.toJson());
+                        imgBtnPlay.setBackgroundResource(R.drawable.ic_action_pause);
+                    }
+
+                    final MediaModel mediaModel = mMediaModel;
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mChatApplication.mMediaPlayer.isPlaying()) {
+                                Utility.pauseMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
+                            } else {
+                                Utility.playMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
+                            }
+                        }
+                    }, 300);
+                } else {
+                    Toast.makeText(getActivity(), "Please select a song from the playlist", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return view;
     }
