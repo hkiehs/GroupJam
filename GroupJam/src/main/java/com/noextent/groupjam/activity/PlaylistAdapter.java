@@ -1,7 +1,8 @@
 package com.noextent.groupjam.activity;
 
-import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
+import com.noextent.groupjam.fragments.AudioPlayerFragment;
 import com.noextent.groupjam.model.ParseMedia;
 import com.noextent.groupjam.utility.Utility;
 import com.parse.ParseException;
@@ -24,10 +26,10 @@ import java.util.Locale;
 public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
 	private static final String LOG_TAG = "PlaylistAdapter";
     private MusicPlayerApplication application;
-	private Context context;
+	private FragmentActivity fragmentActivity;
 
-	public PlaylistAdapter(Context context, MusicPlayerApplication application) {
-		super(context, new QueryFactory<ParseMedia>() {
+	public PlaylistAdapter(FragmentActivity fragmentActivity, MusicPlayerApplication application) {
+		super(fragmentActivity, new QueryFactory<ParseMedia>() {
 			public ParseQuery<ParseMedia> create() {
 				ParseQuery<ParseMedia> query = ParseQuery.getQuery(ParseMedia.TABLE);
 				query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -35,7 +37,7 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
 				return query;
 			}
 		});
-		this.context = context;
+		this.fragmentActivity = fragmentActivity;
         this.application = application;
 	}
 
@@ -64,7 +66,7 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             @Override
             public void onClick(View v) {
                 ParseMedia parseMedia = (ParseMedia) viewHolder.playSong.getTag();
-                Toast.makeText(context, "requesting " + parseMedia.getSongName() + " download", Toast.LENGTH_SHORT).show();
+                Toast.makeText(fragmentActivity, "requesting " + parseMedia.getSongName() + " download", Toast.LENGTH_SHORT).show();
                 new DownloadSong(parseMedia, viewHolder.playSong).execute();
             }
         });
@@ -89,7 +91,6 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
         protected byte[] doInBackground(Void... params) {
             byte[] data = null;
             ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseMedia.TABLE);
-            query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
             query.whereEqualTo(Utility.OBJECT_ID, parseMedia.getObjectId());
             try {
                 List<ParseObject> parseObjects = query.find();
@@ -109,9 +110,16 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
         protected void onProgressUpdate(Integer... progress) {}
 
         protected void onPostExecute(byte[] data) {
-            Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
-            imageButton.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_play));
-            application.mMediaPlayer = Utility.prepareMediaPlayer(context, application.mMediaPlayer, data);
+            Toast.makeText(fragmentActivity, "Download complete", Toast.LENGTH_SHORT).show();
+            imageButton.setImageDrawable(fragmentActivity.getResources().getDrawable(R.drawable.ic_action_play));
+            application.mMediaPlayer = Utility.prepareMediaPlayer(fragmentActivity, application.mMediaPlayer, data);
+
+
+            AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(application, parseMedia);
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, audioPlayerFragment);
+            // transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 

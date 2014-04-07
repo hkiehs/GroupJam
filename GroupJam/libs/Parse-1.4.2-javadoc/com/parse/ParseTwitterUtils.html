@@ -182,7 +182,7 @@ function windowTitle()
                 HREF="../../com/parse/ParseUser.html" title="class in com.parse">ParseUser</A>&nbsp;user,
             <A target="_top"
                HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-               title="class or interface in android.content">Context</A>&nbsp;context)</CODE>
+               title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</CODE>
 
             <BR>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -195,7 +195,7 @@ function windowTitle()
                 HREF="../../com/parse/ParseUser.html" title="class in com.parse">ParseUser</A>&nbsp;user,
             <A target="_top"
                HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-               title="class or interface in android.content">Context</A>&nbsp;context,
+               title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A HREF="../../com/parse/SaveCallback.html" title="class in com.parse">SaveCallback</A>&nbsp;callback)</CODE>
 
             <BR>
@@ -259,7 +259,7 @@ function windowTitle()
                 HREF="../../com/parse/ParseTwitterUtils.html#logIn(android.content.Context, com.parse.LogInCallback)">logIn</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A HREF="../../com/parse/LogInCallback.html"
                title="class in com.parse">LogInCallback</A>&nbsp;callback)</CODE>
 
@@ -449,7 +449,7 @@ public static boolean <B>isLinked</B>(<A HREF="../../com/parse/ParseUser.html"
 public static void <B>link</B>(<A HREF="../../com/parse/ParseUser.html" title="class in com.parse">ParseUser</A>&nbsp;user,
                         <A target="_top"
                            HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                           title="class or interface in android.content">Context</A>&nbsp;context)</PRE>
+                           title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</PRE>
 <DL>
     <DD>
         <DL>
@@ -470,7 +470,7 @@ public static void <B>link</B>(<A HREF="../../com/parse/ParseUser.html" title="c
 public static void <B>link</B>(<A HREF="../../com/parse/ParseUser.html" title="class in com.parse">ParseUser</A>&nbsp;user,
                         <A target="_top"
                            HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                           title="class or interface in android.content">Context</A>&nbsp;context,
+                           title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                         <A HREF="../../com/parse/SaveCallback.html" title="class in com.parse">SaveCallback</A>&nbsp;callback)</PRE>
 <DL>
     <DD>Links a ParseUser to a Twitter account, allowing you to use Twitter for authentication, and
@@ -482,7 +482,7 @@ public static void <B>link</B>(<A HREF="../../com/parse/ParseUser.html" title="c
         <DL>
             <DT><B>Parameters:</B>
             <DD><CODE>user</CODE> - The user to link to a Twitter account.
-            <DD><CODE>context</CODE> - An Android context from which the login dialog can be
+            <DD><CODE>fragmentActivity</CODE> - An Android fragmentActivity from which the login dialog can be
                 launched.
             <DD><CODE>callback</CODE> - Callback for notifying the calling application when the
                 Twitter authentication has
@@ -609,7 +609,7 @@ public static void <B>logIn</B>(<A target="_top"
 <PRE>
 public static void <B>logIn</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A HREF="../../com/parse/LogInCallback.html" title="class in com.parse">LogInCallback</A>&nbsp;callback)</PRE>
 <DL>
     <DD>Logs in a ParseUser using Twitter for authentication. If a user for the given Twitter
@@ -620,7 +620,7 @@ public static void <B>logIn</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - An Android context from which the login dialog can be
+            <DD><CODE>fragmentActivity</CODE> - An Android fragmentActivity from which the login dialog can be
                 launched.
             <DD><CODE>callback</CODE> - Callback for notifying the calling application when the
                 Twitter authentication has

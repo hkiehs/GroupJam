@@ -213,7 +213,7 @@ function windowTitle()
  calling:
  
  <pre>
- PushService.subscribe(context, &quot;the_channel_name&quot;, YourActivity.class);
+ PushService.subscribe(fragmentActivity, &quot;the_channel_name&quot;, YourActivity.class);
  </pre>
  
  When the client receives a push message, a notification will appear in the system tray. When the
@@ -410,7 +410,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#getSubscriptions(android.content.Context)">getSubscriptions</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context)</CODE>
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</CODE>
 
             <BR>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accesses the current set of
@@ -474,7 +474,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#setDefaultPushCallback(android.content.Context, java.lang.Class)">setDefaultPushCallback</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                title="class or interface in java.lang">Class</A>&lt;? extends <A target="_top"
@@ -493,7 +493,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#setDefaultPushCallback(android.content.Context, java.lang.Class, int)">setDefaultPushCallback</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                title="class or interface in java.lang">Class</A>&lt;? extends <A target="_top"
@@ -513,7 +513,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#startServiceIfRequired(android.content.Context)">startServiceIfRequired</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context)</CODE>
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</CODE>
 
             <BR>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -525,7 +525,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#subscribe(android.content.Context, java.lang.String, java.lang.Class)">subscribe</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                title="class or interface in java.lang">String</A>&nbsp;channel,
@@ -547,7 +547,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#subscribe(android.content.Context, java.lang.String, java.lang.Class, int)">subscribe</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                title="class or interface in java.lang">String</A>&nbsp;channel,
@@ -570,7 +570,7 @@ function windowTitle()
                 HREF="../../com/parse/PushService.html#unsubscribe(android.content.Context, java.lang.String)">unsubscribe</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                title="class or interface in java.lang">String</A>&nbsp;channel)</CODE>
@@ -942,7 +942,7 @@ public <B>PushService</B>()</PRE>
 <PRE>
 public static void <B>startServiceIfRequired</B>(<A target="_top"
                                                     HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                                    title="class or interface in android.content">Context</A>&nbsp;context)</PRE>
+                                                    title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</PRE>
 <DL>
     <DD>
         <DL>
@@ -956,7 +956,7 @@ public static void <B>startServiceIfRequired</B>(<A target="_top"
 <PRE>
 public static void <B>subscribe</B>(<A target="_top"
                                        HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                       title="class or interface in android.content">Context</A>&nbsp;context,
+                                       title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                              <A target="_top"
                                 HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                                 title="class or interface in java.lang">String</A>&nbsp;channel,
@@ -972,9 +972,9 @@ public static void <B>subscribe</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - This is used to access local storage to cache the
+            <DD><CODE>fragmentActivity</CODE> - This is used to access local storage to cache the
                 subscription, so it must currently
-                be a viable context.
+                be a viable fragmentActivity.
             <DD><CODE>channel</CODE> - A string identifier that determines which messages will cause
                 a push notification to
                 be sent to this client. The channel name must start with a letter and contain only
@@ -999,7 +999,7 @@ public static void <B>subscribe</B>(<A target="_top"
 <PRE>
 public static void <B>subscribe</B>(<A target="_top"
                                        HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                       title="class or interface in android.content">Context</A>&nbsp;context,
+                                       title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                              <A target="_top"
                                 HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                                 title="class or interface in java.lang">String</A>&nbsp;channel,
@@ -1023,9 +1023,9 @@ public static void <B>subscribe</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - This is used to access local storage to cache the
+            <DD><CODE>fragmentActivity</CODE> - This is used to access local storage to cache the
                 subscription, so it must currently
-                be a viable context.
+                be a viable fragmentActivity.
             <DD><CODE>channel</CODE> - A string identifier that determines which messages will cause
                 a push notification to
                 be sent to this client. The channel name must start with a letter and contain only
@@ -1050,7 +1050,7 @@ public static void <B>subscribe</B>(<A target="_top"
 <PRE>
 public static void <B>unsubscribe</B>(<A target="_top"
                                          HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                         title="class or interface in android.content">Context</A>&nbsp;context,
+                                         title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                                <A target="_top"
                                   HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                                   title="class or interface in java.lang">String</A>&nbsp;channel)</PRE>
@@ -1062,7 +1062,7 @@ public static void <B>unsubscribe</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - A currently viable Context.
+            <DD><CODE>fragmentActivity</CODE> - A currently viable Context.
             <DD><CODE>channel</CODE> - The string defining the channel to unsubscribe from.
         </DL>
     </DD>
@@ -1074,7 +1074,7 @@ public static void <B>unsubscribe</B>(<A target="_top"
 <PRE>
 public static void <B>setDefaultPushCallback</B>(<A target="_top"
                                                     HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                                    title="class or interface in android.content">Context</A>&nbsp;context,
+                                                    title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                                           <A target="_top"
                                              HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                                              title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -1090,9 +1090,9 @@ public static void <B>setDefaultPushCallback</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - This is used to access local storage to cache the
+            <DD><CODE>fragmentActivity</CODE> - This is used to access local storage to cache the
                 subscription, so it must currently
-                be a viable context.
+                be a viable fragmentActivity.
             <DD><CODE>cls</CODE> - This should be a subclass of Activity. An instance of this
                 Activity is started when
                 the user responds to this push notification. If you are not sure what to use here,
@@ -1107,7 +1107,7 @@ public static void <B>setDefaultPushCallback</B>(<A target="_top"
 <PRE>
 public static void <B>setDefaultPushCallback</B>(<A target="_top"
                                                     HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                                    title="class or interface in android.content">Context</A>&nbsp;context,
+                                                    title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                                           <A target="_top"
                                              HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                                              title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -1124,9 +1124,9 @@ public static void <B>setDefaultPushCallback</B>(<A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - This is used to access local storage to cache the
+            <DD><CODE>fragmentActivity</CODE> - This is used to access local storage to cache the
                 subscription, so it must currently
-                be a viable context.
+                be a viable fragmentActivity.
             <DD><CODE>cls</CODE> - This should be a subclass of Activity. An instance of this
                 Activity is started when
                 the user responds to this push notification. If you are not sure what to use here,
@@ -1147,7 +1147,7 @@ public static <A target="_top"
                                                                        title="class or interface in java.lang">String</A>&gt; <B>getSubscriptions</B>(<A
         target="_top"
         HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-        title="class or interface in android.content">Context</A>&nbsp;context)</PRE>
+        title="class or interface in android.content">Context</A>&nbsp;fragmentActivity)</PRE>
 <DL>
     <DD>Accesses the current set of channels for which the current installation is subscribed. It is
         important to remember that the device may receive pushes by means other than channels. This
@@ -1158,7 +1158,7 @@ public static <A target="_top"
     <DD>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - A currently viable Context.
+            <DD><CODE>fragmentActivity</CODE> - A currently viable Context.
             <DT><B>Returns:</B>
             <DD>A set containing all of the channels this application is currently subscribed to.
         </DL>

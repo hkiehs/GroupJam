@@ -15,6 +15,7 @@ import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
 import com.noextent.groupjam.model.MediaModel;
+import com.noextent.groupjam.model.ParseMedia;
 import com.noextent.groupjam.utility.GifDecoder;
 import com.noextent.groupjam.utility.GifDecoderView;
 import com.noextent.groupjam.utility.Utility;
@@ -26,12 +27,18 @@ import java.util.Random;
 public class AudioPlayerFragment extends Fragment {
     public static final String LOG_TAG = "AudioPlayerFragment";
 
-    private MusicPlayerApplication mChatApplication;
-    private GroupInterface groupInterface;
+    private MusicPlayerApplication mChatApplication = null;
+    private GroupInterface groupInterface = null;
+    private ParseMedia parseMedia = null;
 
     public AudioPlayerFragment(MusicPlayerApplication mChatApplication, GroupInterface groupInterface) {
         this.mChatApplication = mChatApplication;
         this.groupInterface = groupInterface;
+    }
+
+    public AudioPlayerFragment(MusicPlayerApplication mChatApplication, ParseMedia parseMedia) {
+        this.mChatApplication = mChatApplication;
+        this.parseMedia = parseMedia;
     }
 
     private ImageButton imgBtnPlay = null;
@@ -48,41 +55,47 @@ public class AudioPlayerFragment extends Fragment {
         imgBtnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mChatApplication.mMediaPlayer != null) {
-                    int position = mChatApplication.mMediaPlayer.getCurrentPosition();
-
-                    MediaModel mMediaModel = new MediaModel();
-                    mMediaModel.playBackPosition = position;
-
-                    if (mChatApplication.mMediaPlayer.isPlaying()) {
-                        mMediaModel.action = Utility.STATUS_PAUSE;
-                        mChatApplication.newLocalUserMessage(mMediaModel.toJson());
-                        imgBtnPlay.setBackgroundResource(R.drawable.ic_action_play);
-                    } else {
-                        mMediaModel.action = Utility.STATUS_PLAY;
-                        mChatApplication.newLocalUserMessage(mMediaModel.toJson());
-                        imgBtnPlay.setBackgroundResource(R.drawable.ic_action_pause);
-                    }
-
-                    final MediaModel mediaModel = mMediaModel;
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mChatApplication.mMediaPlayer.isPlaying()) {
-                                Utility.pauseMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
-                            } else {
-                                Utility.playMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
-                            }
-                        }
-                    }, 300);
-                } else {
-                    Toast.makeText(getActivity(), "Please select a song from the playlist", Toast.LENGTH_SHORT).show();
-                }
+                streamMedia();
             }
         });
 
         return view;
+    }
+
+
+
+    private void streamMedia() {
+        if (mChatApplication.mMediaPlayer != null) {
+            int position = mChatApplication.mMediaPlayer.getCurrentPosition();
+
+            MediaModel mMediaModel = new MediaModel();
+            mMediaModel.playBackPosition = position;
+
+            if (mChatApplication.mMediaPlayer.isPlaying()) {
+                mMediaModel.action = Utility.STATUS_PAUSE;
+                mChatApplication.newLocalUserMessage(mMediaModel.toJson());
+                imgBtnPlay.setBackgroundResource(R.drawable.ic_action_play);
+            } else {
+                mMediaModel.action = Utility.STATUS_PLAY;
+                mChatApplication.newLocalUserMessage(mMediaModel.toJson());
+                imgBtnPlay.setBackgroundResource(R.drawable.ic_action_pause);
+            }
+
+            final MediaModel mediaModel = mMediaModel;
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mChatApplication.mMediaPlayer.isPlaying()) {
+                        Utility.pauseMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
+                    } else {
+                        Utility.playMedia(mChatApplication.mMediaPlayer, mediaModel.playBackPosition);
+                    }
+                }
+            }, 300);
+        } else {
+            Toast.makeText(getActivity(), "Please select a song from the playlist", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class ViewGif extends AsyncTask<Void, Void, Boolean> {

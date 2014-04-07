@@ -279,7 +279,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, java.lang.Class)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -296,7 +296,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, java.lang.Class, int)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -314,7 +314,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, com.parse.ParseQueryAdapter.QueryFactory)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                title="interface in com.parse">ParseQueryAdapter.QueryFactory</A>&lt;<A
                     HREF="../../com/parse/ParseQueryAdapter.html"
@@ -330,7 +330,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, com.parse.ParseQueryAdapter.QueryFactory, int)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                title="interface in com.parse">ParseQueryAdapter.QueryFactory</A>&lt;<A
                     HREF="../../com/parse/ParseQueryAdapter.html"
@@ -347,7 +347,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, java.lang.String)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                title="class or interface in java.lang">String</A>&nbsp;className)</CODE>
@@ -362,7 +362,7 @@ Below, an example showing off the level of configuration available with this cla
                 HREF="../../com/parse/ParseQueryAdapter.html#ParseQueryAdapter(android.content.Context, java.lang.String, int)">ParseQueryAdapter</A></B>(<A
                 target="_top"
                 HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                title="class or interface in android.content">Context</A>&nbsp;context,
+                title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
             <A target="_top"
                HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                title="class or interface in java.lang">String</A>&nbsp;className,
@@ -414,7 +414,7 @@ Below, an example showing off the level of configuration available with this cla
     <TD><CODE><B><A HREF="../../com/parse/ParseQueryAdapter.html#getContext()">getContext</A></B>()</CODE>
 
         <BR>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the context provided by
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the fragmentActivity provided by
         the <code>Activity</code> utilizing this <code>ParseQueryAdapter</code>.
     </TD>
 </TR>
@@ -766,7 +766,7 @@ Below, an example showing off the level of configuration available with this cla
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A target="_top"
                             HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                             title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -777,7 +777,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>clazz</CODE> - The <code>ParseObject</code> subclass type to fetch and
                 display.
         </DL>
@@ -791,7 +791,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A target="_top"
                             HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                             title="class or interface in java.lang">String</A>&nbsp;className)</PRE>
@@ -801,7 +801,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>className</CODE> - The name of the Parse class of <code>ParseObject</code>s to
                 display.
         </DL>
@@ -815,7 +815,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A target="_top"
                             HREF="http://developer.android.com/reference/java/lang/Class.html?is-external=true"
                             title="class or interface in java.lang">Class</A>&lt;? extends <A
@@ -827,7 +827,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>clazz</CODE> - The <code>ParseObject</code> subclass type to fetch and
                 display.
             <DD><CODE>itemViewResource</CODE> - A resource id that represents the layout for an item
@@ -843,7 +843,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A target="_top"
                             HREF="http://developer.android.com/reference/java/lang/String.html?is-external=true"
                             title="class or interface in java.lang">String</A>&nbsp;className,
@@ -854,7 +854,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>className</CODE> - The name of the Parse class of <code>ParseObject</code>s to
                 display.
             <DD><CODE>itemViewResource</CODE> - A resource id that represents the layout for an item
@@ -871,7 +871,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                             title="interface in com.parse">ParseQueryAdapter.QueryFactory</A>&lt;<A
         HREF="../../com/parse/ParseQueryAdapter.html"
@@ -883,7 +883,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>queryFactory</CODE> - A <A
                     HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                     title="interface in com.parse"><CODE>ParseQueryAdapter.QueryFactory</CODE></A>
@@ -902,7 +902,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
 <PRE>
 public <B>ParseQueryAdapter</B>(<A target="_top"
                                    HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
-                                   title="class or interface in android.content">Context</A>&nbsp;context,
+                                   title="class or interface in android.content">Context</A>&nbsp;fragmentActivity,
                          <A HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                             title="interface in com.parse">ParseQueryAdapter.QueryFactory</A>&lt;<A
         HREF="../../com/parse/ParseQueryAdapter.html"
@@ -915,7 +915,7 @@ public <B>ParseQueryAdapter</B>(<A target="_top"
         <P>
         <DL>
             <DT><B>Parameters:</B>
-            <DD><CODE>context</CODE> - The activity utilizing this adapter.
+            <DD><CODE>fragmentActivity</CODE> - The activity utilizing this adapter.
             <DD><CODE>queryFactory</CODE> - A <A
                     HREF="../../com/parse/ParseQueryAdapter.QueryFactory.html"
                     title="interface in com.parse"><CODE>ParseQueryAdapter.QueryFactory</CODE></A>
@@ -946,7 +946,7 @@ public <A target="_top"
           HREF="http://developer.android.com/reference/android/content/Context.html?is-external=true"
           title="class or interface in android.content">Context</A> <B>getContext</B>()</PRE>
 <DL>
-    <DD>Return the context provided by the <code>Activity</code> utilizing this <code>ParseQueryAdapter</code>.
+    <DD>Return the fragmentActivity provided by the <code>Activity</code> utilizing this <code>ParseQueryAdapter</code>.
         <P>
     <DD>
         <DL>
