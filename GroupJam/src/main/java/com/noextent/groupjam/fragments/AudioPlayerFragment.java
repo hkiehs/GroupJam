@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.noextent.groupjam.MusicPlayerApplication;
@@ -29,19 +30,15 @@ public class AudioPlayerFragment extends Fragment {
 
     private MusicPlayerApplication mChatApplication = null;
     private GroupInterface groupInterface = null;
-    private ParseMedia parseMedia = null;
 
     public AudioPlayerFragment(MusicPlayerApplication mChatApplication, GroupInterface groupInterface) {
         this.mChatApplication = mChatApplication;
         this.groupInterface = groupInterface;
     }
 
-    public AudioPlayerFragment(MusicPlayerApplication mChatApplication, ParseMedia parseMedia) {
-        this.mChatApplication = mChatApplication;
-        this.parseMedia = parseMedia;
-    }
-
     private ImageButton imgBtnPlay = null;
+    private TextView tvSongName = null;
+    private TextView tvArtistAlbumName = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,10 +56,24 @@ public class AudioPlayerFragment extends Fragment {
             }
         });
 
+        tvSongName = (TextView) view.findViewById(R.id.textViewSongName);
+        tvArtistAlbumName = (TextView) view.findViewById(R.id.textViewAlbumName);
+
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshView(mChatApplication.mParseMedia);
+    }
 
+    private void refreshView(ParseMedia parseMedia) {
+        if (parseMedia != null) {
+            tvSongName.setText(parseMedia.getSongName());
+            tvArtistAlbumName.setText(parseMedia.getArtistName() + " - " + parseMedia.getAlbumName());
+        }
+    }
 
     private void streamMedia() {
         if (mChatApplication.mMediaPlayer != null) {

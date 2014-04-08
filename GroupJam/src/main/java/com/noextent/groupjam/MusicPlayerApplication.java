@@ -688,5 +688,6 @@ public class MusicPlayerApplication extends Application implements Observable {
      */
     public Device mDevice = null;
     public MediaPlayer mMediaPlayer = null;
+    public ParseMedia mParseMedia = null;
 
 }

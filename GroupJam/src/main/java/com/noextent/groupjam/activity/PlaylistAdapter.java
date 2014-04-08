@@ -113,6 +113,10 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             application.mMediaPlayer = Utility.prepareMediaPlayer(fragmentActivity, application.mMediaPlayer, data);
 
             ((HomeActivity) fragmentActivity).MovePrevious();
+
+            //TODO: set the media
+            application.mParseMedia = null;
+            application.mParseMedia = parseMedia;
         }
     }
 
