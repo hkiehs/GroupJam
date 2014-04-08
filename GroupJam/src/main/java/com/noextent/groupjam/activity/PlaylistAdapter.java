@@ -2,7 +2,6 @@ package com.noextent.groupjam.activity;
 
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
-import com.noextent.groupjam.fragments.AudioPlayerFragment;
 import com.noextent.groupjam.model.ParseMedia;
 import com.noextent.groupjam.utility.Utility;
 import com.parse.ParseException;
@@ -114,21 +112,7 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             imageButton.setImageDrawable(fragmentActivity.getResources().getDrawable(R.drawable.ic_action_play));
             application.mMediaPlayer = Utility.prepareMediaPlayer(fragmentActivity, application.mMediaPlayer, data);
 
-            ((HomeActivity) fragmentActivity).getActionBar().setSelectedNavigationItem(0);
-
-
-            AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment(application, parseMedia);
-//            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.container, audioPlayerFragment);
-//            // transaction.addToBackStack(null);
-//            transaction.commit();
-
-//            String AUDIO_TAG = "AudioPlayerFragment";
-//            FragmentTransaction fragmentTransaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.container, audioPlayerFragment, AUDIO_TAG);
-//            fragmentTransaction.addToBackStack(AUDIO_TAG);
-//            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//            fragmentTransaction.commit();
+            ((HomeActivity) fragmentActivity).MovePrevious();
         }
     }
 

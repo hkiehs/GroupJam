@@ -421,4 +421,14 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         }
     };
 
+    public void MoveNext() {
+        //it doesn't matter if you're already in the last item
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+    }
+
+    public void MovePrevious() {
+        //it doesn't matter if you're already in the first item
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+    }
+
 }
