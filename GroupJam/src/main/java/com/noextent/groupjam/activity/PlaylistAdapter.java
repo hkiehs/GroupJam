@@ -117,6 +117,7 @@ public class PlaylistAdapter extends ParseQueryAdapter<ParseMedia> {
             //TODO: set the media
             application.mParseMedia = null;
             application.mParseMedia = parseMedia;
+            application.mMediaReceiver.onMediaReceived(parseMedia);
         }
     }
 

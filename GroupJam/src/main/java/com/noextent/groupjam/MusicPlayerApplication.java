@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import com.noextent.groupjam.callbacks.MediaReceiver;
 import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
 import com.noextent.groupjam.model.Device;
@@ -689,5 +690,6 @@ public class MusicPlayerApplication extends Application implements Observable {
     public Device mDevice = null;
     public MediaPlayer mMediaPlayer = null;
     public ParseMedia mParseMedia = null;
+    public MediaReceiver mMediaReceiver = null;
 
 }

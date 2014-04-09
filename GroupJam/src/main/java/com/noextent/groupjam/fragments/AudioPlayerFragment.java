@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
 import com.noextent.groupjam.callbacks.GroupInterface;
+import com.noextent.groupjam.callbacks.MediaReceiver;
 import com.noextent.groupjam.model.MediaModel;
 import com.noextent.groupjam.model.ParseMedia;
 import com.noextent.groupjam.utility.GifDecoder;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-public class AudioPlayerFragment extends Fragment {
+public class AudioPlayerFragment extends Fragment implements MediaReceiver {
     public static final String LOG_TAG = "AudioPlayerFragment";
 
     private MusicPlayerApplication mChatApplication = null;
@@ -41,12 +42,19 @@ public class AudioPlayerFragment extends Fragment {
     private TextView tvArtistAlbumName = null;
 
     @Override
+    public void onMediaReceived(ParseMedia parseMedia) {
+        refreshView(parseMedia);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audio_player, container, false);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeParentLayout);
         ViewGif viewGif = new ViewGif(relativeLayout);
         viewGif.execute();
+
+        mChatApplication.mMediaReceiver = this;
 
         imgBtnPlay = (ImageButton) view.findViewById(R.id.imageButtonPlay);
         imgBtnPlay.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +68,6 @@ public class AudioPlayerFragment extends Fragment {
         tvArtistAlbumName = (TextView) view.findViewById(R.id.textViewAlbumName);
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        refreshView(mChatApplication.mParseMedia);
     }
 
     private void refreshView(ParseMedia parseMedia) {
