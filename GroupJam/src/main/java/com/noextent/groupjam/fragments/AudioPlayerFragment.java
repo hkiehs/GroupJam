@@ -46,6 +46,7 @@ public class AudioPlayerFragment extends Fragment implements MediaReceiver {
         refreshView(parseMedia);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -13,11 +13,11 @@ import android.util.Log;
 
 import com.noextent.groupjam.MusicPlayerApplication;
 import com.noextent.groupjam.R;
+import com.noextent.groupjam.activity.HomeActivity;
 import com.noextent.groupjam.callbacks.ChatInterface;
 import com.noextent.groupjam.callbacks.Observable;
 import com.noextent.groupjam.callbacks.Observer;
 import com.noextent.groupjam.model.MediaModel;
-import com.noextent.groupjam.utility.TabWidget;
 import com.noextent.groupjam.utility.Utility;
 
 import org.alljoyn.bus.BusAttachment;
@@ -61,7 +61,7 @@ public class AllJoynService extends Service implements Observer {
 
         CharSequence title = "Group Jams";
         CharSequence message = "Running";
-        Intent intent = new Intent(this, TabWidget.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Notification notification = new Notification(R.drawable.ic_launcher, null, System.currentTimeMillis());
         notification.setLatestEventInfo(this, title, message, pendingIntent);
@@ -1219,6 +1219,7 @@ public class AllJoynService extends Service implements Observer {
     @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Chat")
     public void Chat(String string) {
 
+        Log.i(TAG, "Received Message [" + string + "]");
         MediaModel mediaModel = MediaModel.fromJson(string);
         if (mediaModel != null) {
             if (mediaModel.action.equalsIgnoreCase(Utility.STATUS_PLAY)) {
