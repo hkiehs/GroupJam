@@ -94,6 +94,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         Utility.registerDevice(HomeActivity.this, "Device_Galaxy_Nexus", HomeActivity.this);
+//        Utility.registerDevice(HomeActivity.this, "Device_New", HomeActivity.this);
     }
 
     private void showActionBar() {
@@ -220,7 +221,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
             // register for parse push
             Utility.registerParseInstallation(device);
 
-            //addMessageToList("Registration successful");
+//            addMessageToList("Registration successful");
             // upload file to server
             // INFO: now user should be able to host and retrieve songs from
             // server send download instruction on the group and download it
@@ -347,7 +348,7 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
         boolean haveName = true;
         if (name == null) {
             haveName = false;
-            name = "Not set";
+            name = "No group selected";
         }
         //mChannelName.setText(name);
         switch (channelState) {
@@ -412,6 +413,8 @@ public class HomeActivity extends ActionBarActivity implements SearchView.OnQuer
                 break;
                 case HANDLE_ALLJOYN_ERROR_EVENT: {
                     Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
+                    Toast.makeText(HomeActivity.this, mChatApplication.getErrorString() + "", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "ERROR STRING :: " + mChatApplication.getErrorString());
                     alljoynError();
                 }
                 break;
